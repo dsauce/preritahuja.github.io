@@ -9,7 +9,6 @@ pagerSize = 10
 [params]
 author = "Prerit Ahuja"
 info = "AI, Data and Decision Systems in Investment Banking"
-description = "Personal website of Prerit Ahuja"
 avatarURL = "images/headshot.jpeg"
 since = 2025
 colorScheme = "auto"
@@ -29,3 +28,8 @@ url = "/about/"
 name = "Insights"
 weight = 2
 url = "/insights/"
+
+[[menu.main]]
+name = "Talks"
+weight = 3
+url = "/talks/"
