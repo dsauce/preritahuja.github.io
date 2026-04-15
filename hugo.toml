@@ -2,6 +2,7 @@ baseURL = "https://preritahuja.com/"
 languageCode = "en-gb"
 title = "Prerit Ahuja"
 theme = "coder"
+buildFuture = true
 
 [pagination]
 pagerSize = 10
@@ -18,6 +19,8 @@ name = "linkedin"
 icon = "fa-brands fa-linkedin"
 weight = 1
 url = "https://www.linkedin.com/in/ahujaprerit/"
+target = "_blank"
+rel = "noopener noreferrer"
 
 [[menu.main]]
 name = "About"
