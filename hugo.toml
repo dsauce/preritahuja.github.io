@@ -10,7 +10,9 @@ pagerSize = 10
 [params]
 author = "Prerit Ahuja"
 info = "AI, Data and Decision Systems in Investment Banking"
+description = "Director-level practitioner in investment banking, focused on AI, data, and decision systems. London-based, with practice across UK, Nordic, and US capital markets."
 avatarURL = "images/headshot.jpeg"
+defaultOgImage = "/images/headshot.jpeg"
 since = 2025
 colorScheme = "auto"
 
@@ -28,11 +30,16 @@ weight = 1
 url = "/about/"
 
 [[menu.main]]
-name = "Insights"
+name = "Publications"
 weight = 2
+url = "/publications/"
+
+[[menu.main]]
+name = "Insights"
+weight = 3
 url = "/insights/"
 
 [[menu.main]]
 name = "Talks"
-weight = 3
+weight = 4
 url = "/talks/"
