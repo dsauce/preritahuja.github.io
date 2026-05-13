@@ -20,15 +20,11 @@ Across five capital-markets workflows scored by four independent LLM judges from
 
 ## What this means for deployment committees
 
-Default to **Sonnet 4.6** for the standard workflow stack (DCM extraction, ECM extraction, retrieval, comparable-transactions reasoning). It hits top-of-cluster reliability at one-fifth the cost of Opus 4.7. **Route synthesis-class workloads to GPT-5.5** if a head-to-head test on your specific prompts confirms it (GPT-5.5 wins W3 issuer-profile synthesis by a clear margin). Use **Opus 4.7** only when latency tolerance is tight *and* budget is unconstrained — its reliability is the same as Sonnet's at five times the cost. **Llama 3.3 70B** is acceptable for sovereign-cloud / on-premise extraction (W1 gap is only 0.84 points) but unsafe for anything crossing document boundaries.
-
-## Reproducibility
-
-Every numeric claim in the paper is reproducible from the raw judge JSONLs via the script `eval/verify_numbers.py` released alongside the paper. The script recomputes 95 hardcoded checks — including specific arithmetic phrases like "Sonnet W2 4.74 minus Llama W2 2.51 equals 2.23", every per-dimension cell value quoted in the prose, and the top-tier inter-judge agreement bounds. All 95 pass.
+Default to **Sonnet 4.6** for the standard workflow stack (DCM extraction, ECM extraction, retrieval, comparable-transactions reasoning). It hits top-of-cluster reliability at one-fifth the cost of Opus 4.7. **Route synthesis-class workloads to GPT-5.5** if a head-to-head test on your specific prompts confirms it (GPT-5.5 wins W3 issuer-profile synthesis by a clear margin). Use **Opus 4.7** only when latency tolerance is tight *and* budget is unconstrained; its reliability is the same as Sonnet's at five times the cost. **Llama 3.3 70B** is acceptable for sovereign-cloud / on-premise extraction (W1 gap is only 0.84 points) but unsafe for anything crossing document boundaries.
 
 ## Links
 
-- **Paper (arXiv):** *Coming soon — the preprint link will be added once arXiv assigns the ID.*
+- **Paper (arXiv):** *Coming soon. The preprint link will be added once arXiv assigns the ID.*
 - **Code, corpus, and four-judge scoring data:** [github.com/dsauce/cm-lrs](https://github.com/dsauce/cm-lrs)
 - **Verification script:** [eval/verify_numbers.py](https://github.com/dsauce/cm-lrs/blob/main/eval/verify_numbers.py)
 - **License:** CC BY 4.0
