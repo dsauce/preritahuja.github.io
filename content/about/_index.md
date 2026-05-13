@@ -3,10 +3,11 @@ title: "About"
 date: 2025-10-07
 ---
 
-Prerit Ahuja is an AI, data, and business transformation leader working at the intersection of investment banking, decision systems, and commercial impact.
+Prerit Ahuja is a Director-level practitioner in investment banking, focused on AI, data, and decision systems. London-based, with practice across UK, Nordic, and US capital markets.
 
-Over the last several years, he has built and led data and AI capabilities designed to improve how financial institutions use information, identify opportunities, and scale insight in regulated environments.
+His work centres on building governed, production-ready AI and data systems for origination, execution, and client engagement workflows in regulated financial environments — translating frontier model capability into outputs that meet a banker's, analyst's, or compliance reviewer's defensibility bar.
 
-His work has focused on turning fragmented institutional data into practical systems that support origination, execution, client engagement, and strategic decision-making.
+This site collects publications, selected ideas, and speaking engagements at the intersection of AI, data, and capital markets.
 
-This website is a curated home for selected ideas, experience, and perspectives on AI, data, and investment banking.
+**ORCID:** [0009-0004-0147-4192](https://orcid.org/0009-0004-0147-4192)  
+**Contact:** [prerit86@gmail.com](mailto:prerit86@gmail.com)
