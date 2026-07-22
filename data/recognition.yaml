@@ -1,0 +1,12 @@
+# Recognition (#recognition).
+
+- award: "Global CDO 100 (2026)"
+  body: "HotTopics"
+
+# Owner Decision 2 (rebuild brief, Section 12): the Microsoft/Excel World Championship
+# placings are excluded by default from the executive site. To include them, confirm the
+# exact wording with Prerit and uncomment:
+#
+# - award: "Microsoft Excel World Championship"
+#   body: "Silver; National Championship — 1st"
+#   muted: true

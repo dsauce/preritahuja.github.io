@@ -1,45 +1,60 @@
 baseURL = "https://preritahuja.com/"
 languageCode = "en-gb"
+defaultContentLanguage = "en-gb"
 title = "Prerit Ahuja"
-theme = "coder"
-buildFuture = true
 
-[pagination]
-pagerSize = 10
+# Single-page site: no taxonomies, no list pages, no RSS.
+disableKinds = ["taxonomy", "term", "section", "rss"]
 
 [params]
 author = "Prerit Ahuja"
-info = "AI, Data and Decision Systems in Investment Banking"
-description = "Director-level practitioner in investment banking, focused on AI, data, and decision systems. London-based, with practice across UK, Nordic, and US capital markets."
-avatarURL = "images/headshot.jpeg"
-defaultOgImage = "/images/headshot.jpeg"
-since = 2025
-colorScheme = "auto"
+description = "Prerit Ahuja. AI and data leader in regulated financial services, building and governing enterprise AI operating models from zero to production. Global CDO 100 (2026). London."
+headshot = "/images/headshot.jpeg"
+ogImage = "/images/headshot.jpeg"
+location = "London"
+linkedin = "https://www.linkedin.com/in/ahujaprerit/"
+orcid = "0009-0004-0147-4192"
+orcidURL = "https://orcid.org/0009-0004-0147-4192"
 
-[[params.social]]
-name = "linkedin"
-icon = "fa-brands fa-linkedin"
-weight = 1
-url = "https://www.linkedin.com/in/ahujaprerit/"
-target = "_blank"
-rel = "noopener noreferrer"
+# Contact email, XOR-hex obfuscated (Cloudflare-style). Never store the address in plaintext.
+# Regenerate after changing the address:
+#   node -e 'const e="you@example.com",k=0x5b;let o=k.toString(16).padStart(2,"0");
+#   for(const c of e)o+=(c.charCodeAt(0)^k).toString(16).padStart(2,"0");console.log(o)'
+emailEncoded = "5b2b293e29322f636d1b3c363a323775383436"
 
-[[menu.main]]
+[params.hero]
+headline = "AI & Data Leader in Regulated Financial Services"
+subheadline = "Enterprise AI operating models, built from zero to governed production."
+microline = "London · Global CDO 100 (2026)"
+
+[[params.nav]]
 name = "About"
-weight = 1
-url = "/about/"
+anchor = "about"
 
-[[menu.main]]
-name = "Publications"
-weight = 2
-url = "/publications/"
+[[params.nav]]
+name = "Proof"
+anchor = "proof"
 
-[[menu.main]]
-name = "Insights"
-weight = 3
-url = "/insights/"
+[[params.nav]]
+name = "Research"
+anchor = "research"
 
-[[menu.main]]
-name = "Talks"
-weight = 4
-url = "/talks/"
+[[params.nav]]
+name = "Speaking"
+anchor = "speaking"
+
+[[params.nav]]
+name = "Recognition"
+anchor = "recognition"
+
+[[params.nav]]
+name = "Contact"
+anchor = "contact"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[minify]
+disableXML = true
+  [minify.tdewolff.html]
+  keepQuotes = true
