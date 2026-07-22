@@ -1,0 +1,230 @@
+{{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
+{{- $js := resources.Get "js/main.js" | minify | fingerprint -}}
+{{- $desc := site.Params.description -}}
+{{- $ogImage := site.Params.ogImage | absURL -}}
+{{- $research := index site.Data.research -}}
+{{- $speaking := index site.Data.speaking -}}
+<!DOCTYPE html>
+<html lang="en-gb" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+
+<title>{{ site.Title }}</title>
+<meta name="description" content="{{ $desc }}">
+<meta name="author" content="{{ site.Params.author }}">
+<link rel="canonical" href="{{ "/" | absURL }}">
+
+<meta property="og:title" content="{{ site.Title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ "/" | absURL }}">
+<meta property="og:image" content="{{ $ogImage }}">
+<meta property="og:image:alt" content="Prerit Ahuja">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ site.Title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+<meta name="twitter:image" content="{{ $ogImage }}">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-var.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/source-serif-4-latin-var.woff2" crossorigin>
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+
+{{/* Set the theme before first paint so there is no flash of the wrong scheme. */}}
+<script>(function(){var d=document.documentElement;d.className+=" js";try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.dataset.theme=t;}catch(e){}})();</script>
+
+<script type="application/ld+json">
+{{- dict
+  "@context" "https://schema.org"
+  "@type" "Person"
+  "name" "Prerit Ahuja"
+  "url" (absURL "/")
+  "image" $ogImage
+  "jobTitle" "AI & Data Leader in Regulated Financial Services"
+  "description" "Builds and governs enterprise AI operating models from zero to production in regulated financial services."
+  "address" (dict "@type" "PostalAddress" "addressLocality" "London" "addressCountry" "GB")
+  "sameAs" (slice site.Params.linkedin site.Params.orcidURL)
+  | jsonify (dict "indent" "  ") | safeJS -}}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="bar">
+    <a class="wordmark" href="#top">Prerit Ahuja</a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Sections">
+      <ul>
+        {{- range site.Params.nav }}
+        <li><a href="#{{ .anchor }}" data-nav="{{ .anchor }}">{{ .name }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+
+    <div class="bar-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch colour theme">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.6M12 19v2.6M4.4 12H1.8M22.2 12h-2.6M6.3 6.3 4.5 4.5M19.5 19.5l-1.8-1.8M17.7 6.3l1.8-1.8M4.5 19.5l1.8-1.8"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+      </button>
+
+      <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open section menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 7h17M3.5 12h17M3.5 17h17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <img class="headshot" src="{{ site.Params.headshot }}" width="400" height="400"
+           alt="Prerit Ahuja" fetchpriority="high" decoding="async">
+      <h1>Prerit Ahuja</h1>
+      <p class="headline">{{ site.Params.hero.headline }}</p>
+      <p class="subheadline">{{ site.Params.hero.subheadline }}</p>
+      <p class="microline">{{ site.Params.hero.microline }}</p>
+      <p class="actions">
+        <a class="btn" href="{{ site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="btn" href="#contact" data-email-link>Email</a>
+        <a class="btn btn-quiet" href="#research">Read the research</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="reveal">
+    <div class="wrap">
+      <h2>About</h2>
+      <div class="prose">
+        {{ .Content }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected Proof -->
+  <section id="proof" class="tinted reveal">
+    <div class="wrap">
+      <h2>Selected Proof</h2>
+      <ul class="proof-grid">
+        {{- range site.Data.proof }}
+        <li>
+          <p class="proof-phrase">{{ .phrase }}</p>
+          <p class="proof-detail">{{ .detail }}</p>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Research & Writing -->
+  <section id="research" class="reveal">
+    <div class="wrap">
+      <h2>Research &amp; Writing</h2>
+      {{- with $research.intro }}<p class="section-lead">{{ . }}</p>{{ end }}
+
+      {{- range $research.entries }}
+      <article class="entry">
+        <h3>{{ .title }}</h3>
+        <p class="entry-meta">{{ .author }}, {{ .year }} · {{ .venue }}</p>
+        <p class="entry-desc">{{ .description }}</p>
+
+        {{- with .pullquote }}
+        <blockquote class="callout">{{ . }}</blockquote>
+        {{- end }}
+
+        <p class="entry-links">
+          {{- range .links }}
+          <a class="{{ if .primary }}btn{{ else }}link{{ end }}" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .label }}</a>
+          {{- end }}
+        </p>
+        {{- with .licence }}<p class="entry-licence">{{ . }}</p>{{ end }}
+      </article>
+      {{- end }}
+    </div>
+  </section>
+
+  <!-- Speaking -->
+  <section id="speaking" class="tinted reveal">
+    <div class="wrap">
+      <h2>Speaking</h2>
+      {{- with $speaking.intro }}<p class="section-lead">{{ . }}</p>{{ end }}
+
+      {{- range $group := slice (dict "label" "Upcoming" "items" $speaking.upcoming) (dict "label" "Past" "items" $speaking.past) }}
+      {{- with $group.items }}
+      <h3 class="group-label">{{ $group.label }}</h3>
+      <ul class="talks">
+        {{- range . }}
+        <li>
+          <p class="talk-date">{{ .date }}</p>
+          <p class="talk-event">{{ .event }}</p>
+          {{- with .session }}<p class="talk-session">{{ . }}</p>{{ end }}
+          {{- with .role }}<p class="talk-role">{{ . }}</p>{{ end }}
+        </li>
+        {{- end }}
+      </ul>
+      {{- end }}
+      {{- end }}
+    </div>
+  </section>
+
+  <!-- Recognition -->
+  <section id="recognition" class="reveal">
+    <div class="wrap">
+      <h2>Recognition</h2>
+      <ul class="recognition">
+        {{- range site.Data.recognition }}
+        <li{{ if .muted }} class="muted-item"{{ end }}>
+          <span class="rec-award">{{ .award }}</span>
+          {{- with .body }} <span class="rec-body">{{ . }}</span>{{ end }}
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="tinted reveal">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <dl class="contact">
+        <dt>Email</dt>
+        <dd>
+          {{/* Address is XOR-hex encoded; main.js decodes it. No plaintext in the markup. */}}
+          <a class="link" id="email" href="#contact" data-e="{{ site.Params.emailEncoded }}">Get in touch</a>
+          <noscript><span class="note">Email requires JavaScript. Message me on LinkedIn instead.</span></noscript>
+        </dd>
+
+        <dt>LinkedIn</dt>
+        <dd><a class="link" href="{{ site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">linkedin.com/in/ahujaprerit</a></dd>
+
+        <dt>ORCID</dt>
+        <dd><a class="link" href="{{ site.Params.orcidURL }}" target="_blank" rel="noopener noreferrer">{{ site.Params.orcid }}</a></dd>
+
+        <dt>Location</dt>
+        <dd>{{ site.Params.location }}</dd>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; {{ now.Year }} Prerit Ahuja</p>
+  </div>
+</footer>
+
+<script src="{{ $js.RelPermalink }}" defer></script>
+</body>
+</html>

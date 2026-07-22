@@ -1,0 +1,29 @@
+# Speaking (#speaking). Two groups: upcoming and past.
+# When an upcoming event passes, move the entry into `past` — nothing is date-driven here,
+# so the grouping stays correct without a rebuild schedule.
+
+intro: "Selected speaking engagements."
+
+upcoming:
+  - date: "8–9 September 2026"
+    event: "AIFS London (Arena International)"
+    session: "Proving AI ROI to a CFO: what fails and what survives scrutiny."
+    role: "Speaker, Platform & Product track"
+
+  # TODO: confirm with Prerit — the brief names this event "AINordics, Stockholm"; the
+  # previous site listed the same date and city as the "AI & Automation in Finance Summit".
+  # Using the brief's name. Correct here if the previous site was right.
+  - date: "15 September 2026"
+    event: "AINordics, Stockholm"
+    session: "Beyond Workflows: The Rise of Autonomous Operations."
+    role: "Speaker / panellist"
+
+past:
+  - date: "17 June 2026"
+    event: "AI in Capital Markets Summit, London"
+    session: "AI ROI: A Repeatable Framework."
+    role: "Panel"
+
+  - date: "26 March 2026"
+    event: "Data Management Summit, London"
+    role: "Speaker"

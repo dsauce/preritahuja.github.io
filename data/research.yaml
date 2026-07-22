@@ -1,0 +1,29 @@
+# Research & Writing (#research).
+# `intro` is the optional lead line. `entries` holds published work, newest first.
+# `pullquote` renders as a styled callout beneath its entry.
+
+intro: "Selected published work on making AI output reliable enough to act on in regulated financial workflows."
+
+entries:
+  - title: "Capital Markets LLM Reliability Score (CM-LRS): From Plausible to Bankable"
+    author: "P. Ahuja"
+    year: "2026"
+    venue: "SSRN working paper"
+    description: >-
+      A seven-dimension reliability metric for LLM output in capital-markets workflows.
+      Demonstrated across five workflows and four models, scored by four independent LLM
+      judges from three model families, with a deterministic verification script
+      (95 checks, all passing).
+    pullquote: >-
+      A notable result: two frontier models were statistically indistinguishable on
+      reliability despite a material cost difference, which argues for choosing models on
+      workflow fit and cost rather than headline quality.
+    licence: "CC BY 4.0"
+    links:
+      - label: "Read on SSRN"
+        url: "https://ssrn.com/abstract=6865059"
+        primary: true
+      - label: "Code & data"
+        url: "https://github.com/dsauce/cm-lrs"
+      - label: "Verification script"
+        url: "https://github.com/dsauce/cm-lrs/blob/main/eval/verify_numbers.py"
