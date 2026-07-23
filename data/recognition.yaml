@@ -1,13 +1,20 @@
 # Recognition (#recognition).
-#   award  — the recognition itself
-#   body   — awarding body / year, shown after the award
-#   url    — optional; makes the entry link out
-#   detail — optional supporting line
-#   muted  — optional; renders as a lower-key secondary tier
+#   award    — the recognition itself
+#   body     — awarding body / year, shown after the award
+#   url      — optional; makes the entry link out
+#   detail   — optional supporting line
+#   image    — optional; path under assets/, resized and served as webp + png
+#   imageAlt — required whenever `image` is set; the card carries text, so the alt
+#              text must say what it reads
+#   muted    — optional; moves the entry under the Previous Awards sub-header
 
 - award: "Global CDO Top 100 (2026)"
   body: "HotTopics"
   url: "https://hottopics.ht/awards/global-cdo-100-awards-data#cdo100"
+  image: "images/hottopics-cdo100-2026.png"
+  imageAlt: >-
+    HotTopics Global CDO 100, 2026 Winner: Prerit Ahuja, Director, Global AI and Data
+    Strategy, DNB Carnegie. In partnership with CloverDX.
 
 - award: "Silver medal, Excel World Championship"
   body: "Microsoft, April 2017"

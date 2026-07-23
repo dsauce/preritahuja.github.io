@@ -186,7 +186,7 @@
       <h2>Recognition</h2>
       {{/* Current recognition leads; anything flagged `muted` drops to Previous Awards. */}}
       <ul class="recognition">
-        {{- range site.Data.recognition }}
+        {{- range $rec := site.Data.recognition }}
         {{- if not .muted }}
         <li class="rec-lead">
           <p class="rec-line">
@@ -194,6 +194,23 @@
             {{- with .body }} <span class="rec-body">{{ . }}</span>{{ end }}
           </p>
           {{- with .detail }}<p class="rec-detail">{{ . }}</p>{{ end }}
+
+          {{- with .image }}
+          {{- $src := resources.Get . }}
+          {{- if $src }}
+          {{- $png := $src.Resize "896x png" }}
+          {{- $webp := $src.Resize "896x webp q80" }}
+          <picture>
+            <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+            <img class="rec-image" src="{{ $png.RelPermalink }}"
+                 width="{{ $png.Width }}" height="{{ $png.Height }}"
+                 alt="{{ $rec.imageAlt }}" loading="lazy" decoding="async">
+          </picture>
+          {{- else }}
+          <!-- TODO: recognition image {{ . }} not found under assets/ -->
+          {{- end }}
+          {{- end }}
+
           {{- with .url }}
           <p class="rec-link">
             <a class="link" href="{{ . }}" target="_blank" rel="noopener noreferrer">View the list</a>
