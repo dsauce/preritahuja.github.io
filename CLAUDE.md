@@ -28,11 +28,25 @@ stubs for retired routes.
 
 ### Hero, meta, identifiers → `hugo.toml`
 `[params.hero]` (headline, subheadline, microline), `description` (used for meta, OG and
-Twitter), `linkedin`, `orcid`, `headshot`, and `[[params.nav]]` (nav label + anchor; add an
-entry here and a matching `id` in the layout to add a section).
+Twitter), `linkedin`, `orcid`, `headshot`.
+
+`[[params.nav]]` drives both the sticky nav and the scroll cues. Order matters: each entry
+supplies the cue shown at the foot of the *previous* section.
+
+| field    | used for |
+| -------- | -------- |
+| `name`   | label in the sticky nav bar |
+| `title`  | full section heading; fallback cue text |
+| `anchor` | section `id` |
+| `cue`    | scroll-cue wording at the foot of the previous section |
+| `cta`    | hero button label (first entry only) |
+
+To add a section: add a nav entry, add the `<section id="…">` to the layout, and drop in
+`{{ partial "scroll-cue.html" (index $nextOf "<previous-anchor>") }}`.
 
 ### Layout / styling
 - `layouts/home.html` — the whole page
+- `layouts/_partials/scroll-cue.html` — the section-foot scroll affordance
 - `layouts/404.html`
 - `assets/css/main.css` — tokens at the top (`:root`, plus dark overrides for both
   `prefers-color-scheme` and `[data-theme]`); edit colours in one place
