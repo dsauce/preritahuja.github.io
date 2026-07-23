@@ -1,4 +1,4 @@
-/* preritahuja.com — theme toggle, mobile nav, scroll-spy, reveal, email decode */
+/* preritahuja.com — theme toggle, scroll-spy, scroll progress, reveal-on-scroll */
 (function () {
   "use strict";
 
@@ -17,42 +17,6 @@
 
       root.dataset.theme = next;
       try { localStorage.setItem("theme", next); } catch (e) { /* private mode */ }
-    });
-  }
-
-  /* --- Mobile nav disclosure --------------------------------------------- */
-
-  var menuBtn = document.getElementById("menu-btn");
-  var nav = document.getElementById("site-nav");
-
-  function setMenu(open) {
-    if (!menuBtn || !nav) return;
-    nav.dataset.open = open ? "true" : "false";
-    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
-    menuBtn.setAttribute("aria-label", (open ? "Close" : "Open") + " section menu");
-  }
-
-  if (menuBtn && nav) {
-    setMenu(false);
-
-    menuBtn.addEventListener("click", function () {
-      setMenu(nav.dataset.open !== "true");
-    });
-
-    nav.addEventListener("click", function (e) {
-      if (e.target.closest("a")) setMenu(false);
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && nav.dataset.open === "true") {
-        setMenu(false);
-        menuBtn.focus();
-      }
-    });
-
-    document.addEventListener("click", function (e) {
-      if (nav.dataset.open !== "true") return;
-      if (!nav.contains(e.target) && !menuBtn.contains(e.target)) setMenu(false);
     });
   }
 
@@ -96,14 +60,58 @@
     }, ms + 30);
   }
 
+  // On mobile the nav is a horizontally scrollable strip, so keep the active chip
+  // in view without ever scrolling the page itself.
+  var navStrip = document.getElementById("site-nav");
+
+  function revealChip(link) {
+    if (!navStrip || navStrip.scrollWidth <= navStrip.clientWidth) return;
+    var strip = navStrip.getBoundingClientRect();
+    var chip = link.getBoundingClientRect();
+    var target = navStrip.scrollLeft + (chip.left - strip.left)
+               - (strip.width - chip.width) / 2;
+    navStrip.scrollTo({ left: target, behavior: reduceMotion.matches ? "auto" : "smooth" });
+  }
+
+  var lastActive;
+
   function markActive(id) {
     navLinks.forEach(function (link) {
       if (id && link.dataset.nav === id) {
-        link.setAttribute("aria-current", "true");
+        if (link.getAttribute("aria-current") !== "true") {
+          link.setAttribute("aria-current", "true");
+          revealChip(link);
+        }
       } else {
         link.removeAttribute("aria-current");
       }
     });
+
+    // Back at the hero: return the strip to the first section rather than
+    // leaving it part-scrolled with the first chip clipped.
+    if (id !== lastActive) {
+      if (!id && navStrip && navStrip.scrollLeft > 0) {
+        navStrip.scrollTo({ left: 0, behavior: reduceMotion.matches ? "auto" : "smooth" });
+      }
+      lastActive = id;
+    }
+  }
+
+  /* --- Scroll progress ---------------------------------------------------- */
+
+  var progress = document.getElementById("scroll-progress-bar");
+
+  function syncProgress() {
+    if (!progress) return;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var ratio = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    progress.style.transform = "scaleX(" + ratio + ")";
+  }
+
+  // Anchor offsets key off the real header height, which differs between the
+  // one-row desktop bar and the two-row mobile bar.
+  function syncHeaderVar() {
+    root.style.setProperty("--header-now", headerHeight() + "px");
   }
 
   function syncActive() {
@@ -163,13 +171,23 @@
     ticking = true;
     window.requestAnimationFrame(function () {
       syncActive();
+      syncProgress();
       ticking = false;
     });
   }
 
+  function onResize() {
+    syncHeaderVar();
+    onScroll();
+  }
+
   window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll, { passive: true });
+  window.addEventListener("resize", onResize, { passive: true });
+  window.addEventListener("load", onResize);
+
+  syncHeaderVar();
   syncActive();
+  syncProgress();
 
   /* --- Reveal on entry ---------------------------------------------------- */
 
@@ -191,25 +209,4 @@
     Array.prototype.forEach.call(revealables, function (el) { observer.observe(el); });
   }
 
-  /* --- Email: decode the XOR-hex address at runtime ----------------------- */
-
-  var emailEl = document.getElementById("email");
-
-  if (emailEl && emailEl.dataset.e) {
-    var hex = emailEl.dataset.e;
-    var key = parseInt(hex.slice(0, 2), 16);
-    var address = "";
-
-    for (var j = 2; j < hex.length; j += 2) {
-      address += String.fromCharCode(parseInt(hex.substr(j, 2), 16) ^ key);
-    }
-
-    emailEl.href = "mailto:" + address;
-    emailEl.textContent = address;
-
-    Array.prototype.forEach.call(
-      document.querySelectorAll("[data-email-link]"),
-      function (el) { el.href = "mailto:" + address; }
-    );
-  }
 })();

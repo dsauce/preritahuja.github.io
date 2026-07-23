@@ -5,13 +5,6 @@
 {{- $research := index site.Data.research -}}
 {{- $speaking := index site.Data.speaking -}}
 {{- $nav := site.Params.nav -}}
-{{/* anchor -> the nav entry that follows it, so each section can link to the next */}}
-{{- $nextOf := dict -}}
-{{- range $i, $e := $nav -}}
-  {{- if lt (add $i 1) (len $nav) -}}
-    {{- $nextOf = merge $nextOf (dict $e.anchor (index $nav (add $i 1))) -}}
-  {{- end -}}
-{{- end -}}
 <!DOCTYPE html>
 <html lang="en-gb" prefix="og: https://ogp.me/ns#">
 <head>
@@ -66,6 +59,8 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
+<div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
 <header class="site-header" id="site-header">
   <div class="bar">
     <a class="wordmark" href="#top">Prerit Ahuja</a>
@@ -82,10 +77,6 @@
       <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch colour theme">
         <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.6M12 19v2.6M4.4 12H1.8M22.2 12h-2.6M6.3 6.3 4.5 4.5M19.5 19.5l-1.8-1.8M17.7 6.3l1.8-1.8M4.5 19.5l1.8-1.8"/></svg>
         <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
-      </button>
-
-      <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open section menu">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 7h17M3.5 12h17M3.5 17h17"/></svg>
       </button>
     </div>
   </div>
@@ -104,7 +95,6 @@
       <p class="microline">{{ site.Params.hero.microline }}</p>
       <p class="actions">
         <a class="btn" href="{{ site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a class="btn" href="#contact" data-email-link>Email</a>
         {{- with index $nav 0 }}
         <a class="btn btn-quiet" href="#{{ .anchor }}">{{ or .cta .title }}</a>
         {{- end }}
@@ -121,7 +111,6 @@
       <div class="prose">
         {{ .Content }}
       </div>
-      {{ partial "scroll-cue.html" (index $nextOf "about") }}
     </div>
   </section>
 
@@ -137,7 +126,6 @@
         </li>
         {{- end }}
       </ul>
-      {{ partial "scroll-cue.html" (index $nextOf "proof") }}
     </div>
   </section>
 
@@ -165,7 +153,6 @@
         {{- with .licence }}<p class="entry-licence">{{ . }}</p>{{ end }}
       </article>
       {{- end }}
-      {{ partial "scroll-cue.html" (index $nextOf "research") }}
     </div>
   </section>
 
@@ -190,7 +177,6 @@
       </ul>
       {{- end }}
       {{- end }}
-      {{ partial "scroll-cue.html" (index $nextOf "speaking") }}
     </div>
   </section>
 
@@ -198,9 +184,11 @@
   <section id="recognition" class="reveal">
     <div class="wrap">
       <h2>Recognition</h2>
+      {{/* Current recognition leads; anything flagged `muted` drops to Previous Awards. */}}
       <ul class="recognition">
         {{- range site.Data.recognition }}
-        <li{{ if .muted }} class="muted-item"{{ end }}>
+        {{- if not .muted }}
+        <li class="rec-lead">
           <p class="rec-line">
             <span class="rec-award">{{ .award }}</span>
             {{- with .body }} <span class="rec-body">{{ . }}</span>{{ end }}
@@ -213,8 +201,23 @@
           {{- end }}
         </li>
         {{- end }}
+        {{- end }}
       </ul>
-      {{ partial "scroll-cue.html" (index $nextOf "recognition") }}
+
+      {{- with where site.Data.recognition "muted" true }}
+      <h3 class="group-label">Previous Awards</h3>
+      <ul class="recognition recognition-prev">
+        {{- range . }}
+        <li>
+          <p class="rec-line">
+            <span class="rec-award">{{ .award }}</span>
+            {{- with .body }} <span class="rec-body">{{ . }}</span>{{ end }}
+          </p>
+          {{- with .detail }}<p class="rec-detail">{{ . }}</p>{{ end }}
+        </li>
+        {{- end }}
+      </ul>
+      {{- end }}
     </div>
   </section>
 
@@ -222,17 +225,12 @@
   <section id="contact" class="tinted reveal">
     <div class="wrap">
       <h2>Contact</h2>
+      {{/* LinkedIn is the only contact route. No email address on this site, in any form. */}}
+      <p class="contact-primary">
+        <a class="btn" href="{{ site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">Message me on LinkedIn</a>
+      </p>
+
       <dl class="contact">
-        <dt>Email</dt>
-        <dd>
-          {{/* Address is XOR-hex encoded; main.js decodes it. No plaintext in the markup. */}}
-          <a class="link" id="email" href="#contact" data-e="{{ site.Params.emailEncoded }}">Get in touch</a>
-          <noscript><span class="note">Email requires JavaScript. Message me on LinkedIn instead.</span></noscript>
-        </dd>
-
-        <dt>LinkedIn</dt>
-        <dd><a class="link" href="{{ site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">linkedin.com/in/ahujaprerit</a></dd>
-
         <dt>ORCID</dt>
         <dd><a class="link" href="{{ site.Params.orcidURL }}" target="_blank" rel="noopener noreferrer">{{ site.Params.orcid }}</a></dd>
 

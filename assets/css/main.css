@@ -61,7 +61,7 @@
   --measure: 44rem;          /* ~704px reading column */
   --header-h: 3.75rem;
   --gutter: clamp(1.25rem, 5vw, 2rem);
-  --section-y: clamp(3.5rem, 8vw, 6rem);
+  --section-y: clamp(2.25rem, 5vw, 4.25rem);
 
   --radius: 6px;
 }
@@ -267,36 +267,74 @@ a:hover { color: var(--accent-hover); }
   :root:not([data-theme="light"]) .i-moon { display: none; }
 }
 
-.menu-btn { display: none; }
-
+/* Mobile: the section list stays visible as a scrollable strip on a second row,
+   so a phone reader can see the shape of the page without opening anything. */
 @media (max-width: 51rem) {
-  .menu-btn { display: inline-grid; }
+  :root { --header-h: 5.5rem; }
+
+  .bar {
+    flex-wrap: wrap;
+    min-height: 0;
+    gap: 0 0.5rem;
+  }
+
+  .wordmark { padding-block: 0.8rem; }
+  .bar-actions { padding-block: 0.25rem; }
 
   .site-nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--bg-raise);
-    border-bottom: 1px solid var(--rule);
-    box-shadow: var(--shadow);
-    display: none;
+    order: 3;
+    width: 100%;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    border-top: 1px solid var(--rule);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
-
-  .site-nav[data-open="true"] { display: block; }
+  .site-nav::-webkit-scrollbar { display: none; }
 
   .site-nav ul {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 0.4rem var(--gutter) 0.75rem;
+    flex-wrap: nowrap;
+    gap: 0.125rem;
+    width: max-content;
+    padding-block: 0.15rem;
   }
 
+  /* >=44px tap targets on touch screens */
   .site-nav a {
-    padding: 0.6rem 0.5rem;
-    font-size: 0.9375rem;
-    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-inline: 0.6rem;
+    white-space: nowrap;
   }
+
+  .icon-btn { width: 2.75rem; height: 2.75rem; }
+
+  .btn, .scroll-cue { min-height: 2.75rem; }
+}
+
+/* --- Scroll progress ------------------------------------------------------ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 60;
+  pointer-events: none;
+  background: transparent;
+}
+
+.scroll-progress span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  will-change: transform;
 }
 
 /* --- Sections ------------------------------------------------------------- */
@@ -304,7 +342,7 @@ a:hover { color: var(--accent-hover); }
 main > section {
   padding-block: var(--section-y);
   border-top: 1px solid var(--rule);
-  scroll-margin-top: var(--header-h);
+  scroll-margin-top: var(--header-now, var(--header-h));
 }
 
 main > section.tinted { background: var(--bg-tint); }
@@ -328,7 +366,7 @@ main > section > .wrap > h2 {
 .hero {
   padding-block: clamp(3rem, 9vw, 5.5rem);
   border-top: 0;
-  scroll-margin-top: var(--header-h);
+  scroll-margin-top: var(--header-now, var(--header-h));
 }
 
 .headshot {
@@ -374,7 +412,9 @@ main > section > .wrap > h2 {
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.5rem 1rem;
   border: 1px solid var(--accent);
   border-radius: var(--radius);
@@ -635,20 +675,22 @@ main > section > .wrap > h2 {
   padding: 0;
 }
 
-.recognition li {
-  padding: 1.1rem 1.25rem;
-  background: var(--bg-tint);
-  border: 1px solid var(--rule);
+/* Lead item: current, senior recognition. Deliberately dominant. */
+.rec-lead {
+  padding: 1.4rem 1.5rem;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
   border-radius: var(--radius);
 }
-.recognition li + li { margin-top: 0.75rem; }
 
-.rec-award {
+.rec-lead .rec-award {
   font-family: var(--serif);
-  font-size: 1.125rem;
+  font-size: 1.375rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.014em;
 }
+
+.rec-lead .rec-body { font-size: 1.0625rem; }
 
 .rec-body { color: var(--muted); }
 .rec-body::before { content: "· "; }
@@ -660,20 +702,28 @@ main > section > .wrap > h2 {
   color: var(--muted);
 }
 
-.rec-link { margin-top: 0.6rem; font-size: 0.9375rem; }
+.rec-link { margin-top: 0.7rem; font-size: 0.9375rem; }
 
-/* Secondary tier: present, but clearly subordinate to the lead recognition. */
-.recognition .muted-item {
-  background: transparent;
-  padding-block: 0.85rem;
+/* Previous awards: kept in full, sized down so they read as history. */
+#recognition .group-label { margin-top: 2rem; }
+
+.recognition-prev li {
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--rule);
 }
-.recognition .muted-item .rec-award {
+.recognition-prev li:last-child { border-bottom: 1px solid var(--rule); }
+
+.recognition-prev .rec-award {
   font-family: var(--sans);
   font-size: 0.9375rem;
   font-weight: 600;
+  color: var(--muted);
 }
-.recognition .muted-item .rec-body { font-size: 0.9375rem; }
-.recognition .muted-item .rec-detail { font-size: 0.875rem; }
+
+.recognition-prev .rec-body { font-size: 0.9375rem; }
+.recognition-prev .rec-detail { font-size: 0.875rem; margin-top: 0.15rem; }
+
+.contact-primary { margin-bottom: 1.75rem; }
 
 /* --- Contact -------------------------------------------------------------- */
 
@@ -695,7 +745,6 @@ main > section > .wrap > h2 {
 
 .contact dd { margin: 0; }
 
-.note { font-size: 0.875rem; color: var(--muted); }
 
 @media (max-width: 30rem) {
   .contact { grid-template-columns: 1fr; gap: 0.2rem; }

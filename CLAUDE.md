@@ -19,8 +19,9 @@ These drive the page directly. Edit the YAML, rebuild, done. No layout changes n
   `primary: true` to render as a button)
 - `data/speaking.yaml` — `intro`, `upcoming`, `past`. Grouping is **manual, not date-driven**:
   when an event passes, move the entry from `upcoming` to `past`.
-- `data/recognition.yaml` — awards (`award` + `body`; optional `muted: true` for a
-  lower-key line)
+- `data/recognition.yaml` — awards (`award`, `body`, optional `url` and `detail`).
+  `muted: true` moves an entry out of the lead card and under the **Previous Awards**
+  sub-header, rendered smaller. Entries without it are lead cards.
 
 ### About prose → `content/_index.md`
 The body markdown renders into the About section. Front matter `aliases` emit redirect
@@ -30,41 +31,38 @@ stubs for retired routes.
 `[params.hero]` (headline, subheadline, microline), `description` (used for meta, OG and
 Twitter), `linkedin`, `orcid`, `headshot`.
 
-`[[params.nav]]` drives both the sticky nav and the scroll cues. Order matters: each entry
-supplies the cue shown at the foot of the *previous* section.
+`[[params.nav]]` drives the sticky section nav, in order.
 
 | field    | used for |
 | -------- | -------- |
-| `name`   | label in the sticky nav bar |
-| `title`  | full section heading; fallback cue text |
+| `name`   | label in the nav strip |
+| `title`  | full section heading |
 | `anchor` | section `id` |
-| `cue`    | scroll-cue wording at the foot of the previous section |
+| `cue`    | hero scroll-cue wording (first entry only) |
 | `cta`    | hero button label (first entry only) |
 
-To add a section: add a nav entry, add the `<section id="…">` to the layout, and drop in
-`{{ partial "scroll-cue.html" (index $nextOf "<previous-anchor>") }}`.
+To add a section: add a nav entry and add the matching `<section id="…">` to the layout.
 
 ### Layout / styling
 - `layouts/home.html` — the whole page
-- `layouts/_partials/scroll-cue.html` — the section-foot scroll affordance
+- `layouts/_partials/scroll-cue.html` — the hero scroll affordance
 - `layouts/404.html`
 - `assets/css/main.css` — tokens at the top (`:root`, plus dark overrides for both
   `prefers-color-scheme` and `[data-theme]`); edit colours in one place
-- `assets/js/main.js` — theme toggle, mobile nav, scroll-spy, reveal-on-scroll, email decode
+- `assets/js/main.js` — theme toggle, scroll-spy, scroll-progress bar, reveal-on-scroll
 
 CSS and JS go through Hugo's asset pipeline (minified + fingerprinted), so cache busting is
 automatic.
 
-## Contact email is obfuscated — do not paste it in plaintext
+## No email address on this site
 
-The address is stored XOR-hex encoded in `hugo.toml` as `params.emailEncoded` and decoded by
-`main.js` at runtime, so the served HTML contains no readable address. After changing the
-address, regenerate it:
+The contact route is LinkedIn only. There is deliberately **no email address anywhere** —
+not plaintext, not obfuscated, not behind JavaScript, not a form, not a domain alias. If you
+are asked to add a contact method, add it alongside LinkedIn; do not reintroduce an address.
 
-```bash
-node -e 'const e="you@example.com",k=0x5b;let o=k.toString(16).padStart(2,"0");
-for(const c of e)o+=(c.charCodeAt(0)^k).toString(16).padStart(2,"0");console.log(o)'
-```
+Do not construct a LinkedIn deep messaging link either (`/messaging/thread/new/?recipient=`
+and similar). Those need an authenticated session and commonly dump the visitor into their
+own inbox. Link to the profile URL; the Message control is visible on arrival.
 
 ## Fonts
 
@@ -96,6 +94,18 @@ this is the static equivalent. Add a stub if you retire another route.
 - `public/` is committed but CI rebuilds it; keep it in sync by running `hugo --minify`
   before committing
 - CDN cache TTL is 600s; hard refresh if you don't see changes after ~10 min
+
+## Navigation and spacing
+
+- The section nav is **always visible**, including on mobile, where it becomes a
+  horizontally scrollable strip on a second header row. There is no hamburger. The active
+  chip scrolls itself into view; at the top of the page the strip resets to the first chip.
+- **Anchor offsets** use `--header-now`, which `main.js` sets from the measured header
+  height on load and resize. The mobile header is two rows and therefore taller than the
+  desktop one, so a fixed value would misplace anchored headings.
+- **Only the hero has a scroll cue.** Inter-section spacing (`--section-y`) is deliberately
+  tight so the next heading peeks above the fold; that is the scroll signal everywhere else.
+  If you increase `--section-y`, re-check that the next heading still peeks at 375x812.
 
 ## Gotchas
 
