@@ -16,22 +16,16 @@ linkedin = "https://www.linkedin.com/in/ahujaprerit/"
 orcid = "0009-0004-0147-4192"
 orcidURL = "https://orcid.org/0009-0004-0147-4192"
 
-# Contact email, XOR-hex obfuscated (Cloudflare-style). Never store the address in plaintext.
-# Regenerate after changing the address:
-#   node -e 'const e="you@example.com",k=0x5b;let o=k.toString(16).padStart(2,"0");
-#   for(const c of e)o+=(c.charCodeAt(0)^k).toString(16).padStart(2,"0");console.log(o)'
-emailEncoded = "5b2b293e29322f636d1b3c363a323775383436"
-
 [params.hero]
 headline = "AI & Data Leader in Regulated Financial Services"
 subheadline = "Enterprise AI operating models, built from zero to governed production."
 microline = "London · Global CDO Top 100 (2026)"
 
-# Nav order also drives the scroll cue at the foot of each section.
-#   name  = label in the sticky nav bar
+# Drives the sticky section nav, in order.
+#   name  = label in the nav strip
 #   title = full section heading
-#   cue   = scroll-cue wording shown at the foot of the PREVIOUS section
-#   cta   = hero button label (hero only)
+#   cue   = hero scroll-cue wording (first entry only)
+#   cta   = hero button label (first entry only)
 [[params.nav]]
 name = "About"
 title = "About"
@@ -43,31 +37,26 @@ cta = "About Me"
 name = "Proof"
 title = "Selected Proof"
 anchor = "proof"
-cue = "Scroll on to read Selected Proof"
 
 [[params.nav]]
 name = "Research"
 title = "Research & Writing"
 anchor = "research"
-cue = "Scroll on to read Research & Writing"
 
 [[params.nav]]
 name = "Speaking"
 title = "Speaking"
 anchor = "speaking"
-cue = "Scroll on to read Speaking"
 
 [[params.nav]]
 name = "Recognition"
 title = "Recognition"
 anchor = "recognition"
-cue = "Scroll on to read Recognition"
 
 [[params.nav]]
 name = "Contact"
 title = "Contact"
 anchor = "contact"
-cue = "Scroll on to get in touch"
 
 [markup.goldmark.renderer]
 unsafe = true
