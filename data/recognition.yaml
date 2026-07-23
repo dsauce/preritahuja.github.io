@@ -1,12 +1,19 @@
 # Recognition (#recognition).
+#   award  — the recognition itself
+#   body   — awarding body / year, shown after the award
+#   url    — optional; makes the entry link out
+#   detail — optional supporting line
+#   muted  — optional; renders as a lower-key secondary tier
 
-- award: "Global CDO 100 (2026)"
+- award: "Global CDO Top 100 (2026)"
   body: "HotTopics"
+  url: "https://hottopics.ht/awards/global-cdo-100-awards-data#cdo100"
 
-# Owner Decision 2 (rebuild brief, Section 12): the Microsoft/Excel World Championship
-# placings are excluded by default from the executive site. To include them, confirm the
-# exact wording with Prerit and uncomment:
-#
-# - award: "Microsoft Excel World Championship"
-#   body: "Silver; National Championship — 1st"
-#   muted: true
+- award: "Silver medal, Excel World Championship"
+  body: "Microsoft, April 2017"
+  detail: "Represented Norway against national champions from across the world."
+  muted: true
+
+- award: "First place, Microsoft National Championship in Excel"
+  body: "Microsoft, October 2015"
+  muted: true

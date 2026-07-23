@@ -8,7 +8,7 @@ disableKinds = ["taxonomy", "term", "section", "rss"]
 
 [params]
 author = "Prerit Ahuja"
-description = "Prerit Ahuja. AI and data leader in regulated financial services, building and governing enterprise AI operating models from zero to production. Global CDO 100 (2026). London."
+description = "Prerit Ahuja. AI and data leader in regulated financial services, building and governing enterprise AI operating models from zero to production. Global CDO Top 100 (2026). London."
 headshot = "/images/headshot.jpeg"
 ogImage = "/images/headshot.jpeg"
 location = "London"
@@ -25,30 +25,41 @@ emailEncoded = "5b2b293e29322f636d1b3c363a323775383436"
 [params.hero]
 headline = "AI & Data Leader in Regulated Financial Services"
 subheadline = "Enterprise AI operating models, built from zero to governed production."
-microline = "London · Global CDO 100 (2026)"
+microline = "London · Global CDO Top 100 (2026)"
 
+# Nav order also drives the "next section" links at the foot of each section.
+#   name  = label in the sticky nav bar
+#   title = full section heading, used by the next-section link
+#   cta   = overrides the next-section link label (hero only)
 [[params.nav]]
 name = "About"
+title = "About"
 anchor = "about"
+cta = "About Me"
 
 [[params.nav]]
 name = "Proof"
+title = "Selected Proof"
 anchor = "proof"
 
 [[params.nav]]
 name = "Research"
+title = "Research & Writing"
 anchor = "research"
 
 [[params.nav]]
 name = "Speaking"
+title = "Speaking"
 anchor = "speaking"
 
 [[params.nav]]
 name = "Recognition"
+title = "Recognition"
 anchor = "recognition"
 
 [[params.nav]]
 name = "Contact"
+title = "Contact"
 anchor = "contact"
 
 [markup.goldmark.renderer]

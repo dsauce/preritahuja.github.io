@@ -403,6 +403,138 @@ main > section > .wrap > h2 {
 }
 .link:hover { color: var(--accent-hover); border-bottom-color: var(--accent-hover); }
 
+/* --- Scroll cue (hero) ---------------------------------------------------- */
+
+.scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 2.75rem;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  border-radius: 999px;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+.scroll-cue:hover { color: var(--accent-hover); background: var(--accent-soft); }
+
+.scroll-cue-text {
+  order: 2;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.scroll-cue-arrow {
+  order: 1;
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: none;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: var(--bg);
+  animation: nudge 1.8s ease-in-out infinite;
+}
+
+.scroll-cue-arrow svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@keyframes nudge {
+  0%, 55%, 100% { transform: translateY(0); }
+  28%           { transform: translateY(7px); }
+}
+
+/* --- Next-section link ---------------------------------------------------- */
+
+.next-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.75rem;
+  padding: 0.95rem 1.15rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease,
+              transform 0.15s ease;
+}
+
+.next-section:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.next-text { display: flex; flex-direction: column; gap: 0.15rem; }
+
+.next-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.next-title {
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.next-chevron {
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  animation: nudge 2.4s ease-in-out infinite;
+}
+.next-section:hover .next-chevron { background: var(--accent); color: var(--bg); }
+
+.next-chevron.up { animation: none; }
+
+.next-chevron svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+}
+.back-to-top:hover { color: var(--accent); }
+.back-to-top .next-chevron { width: 2rem; height: 2rem; }
+.back-to-top .next-chevron svg { width: 1.05rem; height: 1.05rem; }
+
 /* --- About prose ---------------------------------------------------------- */
 
 .prose p { margin-bottom: 1.15rem; }
@@ -546,7 +678,7 @@ main > section > .wrap > h2 {
 }
 
 .recognition li {
-  padding: 1rem 1.25rem;
+  padding: 1.1rem 1.25rem;
   background: var(--bg-tint);
   border: 1px solid var(--rule);
   border-radius: var(--radius);
@@ -563,12 +695,27 @@ main > section > .wrap > h2 {
 .rec-body { color: var(--muted); }
 .rec-body::before { content: "· "; }
 
-.recognition .muted-item { background: transparent; }
+.rec-detail {
+  margin-top: 0.3rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.rec-link { margin-top: 0.6rem; font-size: 0.9375rem; }
+
+/* Secondary tier: present, but clearly subordinate to the lead recognition. */
+.recognition .muted-item {
+  background: transparent;
+  padding-block: 0.85rem;
+}
 .recognition .muted-item .rec-award {
   font-family: var(--sans);
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 600;
 }
+.recognition .muted-item .rec-body { font-size: 0.9375rem; }
+.recognition .muted-item .rec-detail { font-size: 0.875rem; }
 
 /* --- Contact -------------------------------------------------------------- */
 

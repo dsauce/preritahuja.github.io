@@ -25,5 +25,3 @@ entries:
         primary: true
       - label: "Code & data"
         url: "https://github.com/dsauce/cm-lrs"
-      - label: "Verification script"
-        url: "https://github.com/dsauce/cm-lrs/blob/main/eval/verify_numbers.py"

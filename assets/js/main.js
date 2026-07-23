@@ -70,14 +70,30 @@
   }
 
   // A section near the end of the page can be too short to ever reach the top of the
-  // viewport, so clicking its nav link would otherwise highlight a later section.
-  // While a click is settling, that section wins.
+  // viewport, so following a link to it would otherwise highlight a later section.
+  // While a jump is settling, the section that was asked for wins.
   var lockedId = null;
   var lockUntil = 0;
+  var lockTimer = null;
 
   function releaseLock() {
     lockedId = null;
     lockUntil = 0;
+    clearTimeout(lockTimer);
+    lockTimer = null;
+  }
+
+  // The smooth scroll usually finishes before the lock expires, and no further scroll
+  // event follows it, so re-sync on expiry rather than waiting for one.
+  function lockTo(id, ms) {
+    releaseLock();
+    lockedId = id;
+    lockUntil = performance.now() + ms;
+    markActive(id);
+    lockTimer = setTimeout(function () {
+      releaseLock();
+      syncActive();
+    }, ms + 30);
   }
 
   function markActive(id) {
@@ -114,13 +130,24 @@
     markActive(active ? active.id : null);
   }
 
-  navLinks.forEach(function (link) {
-    link.addEventListener("click", function () {
-      lockedId = link.dataset.nav;
-      lockUntil = performance.now() + 1400;
-      markActive(lockedId);
-    });
-  });
+  // Every in-page jump counts as intent: the sticky nav, the per-section "next"
+  // links, the hero scroll cue and back-to-top.
+  var sectionIds = sections.map(function (s) { return s.id; });
+
+  Array.prototype.forEach.call(
+    document.querySelectorAll('a[href^="#"]'),
+    function (link) {
+      link.addEventListener("click", function () {
+        var id = (link.getAttribute("href") || "").slice(1);
+        if (sectionIds.indexOf(id) !== -1) {
+          lockTo(id, 1400);
+        } else if (id === "top") {
+          releaseLock();
+          markActive(null);
+        }
+      });
+    }
+  );
 
   // Any deliberate scroll input hands control back to the scroll position.
   ["wheel", "touchstart", "keydown"].forEach(function (evt) {
