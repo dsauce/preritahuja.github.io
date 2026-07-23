@@ -27,40 +27,47 @@ headline = "AI & Data Leader in Regulated Financial Services"
 subheadline = "Enterprise AI operating models, built from zero to governed production."
 microline = "London · Global CDO Top 100 (2026)"
 
-# Nav order also drives the "next section" links at the foot of each section.
+# Nav order also drives the scroll cue at the foot of each section.
 #   name  = label in the sticky nav bar
-#   title = full section heading, used by the next-section link
-#   cta   = overrides the next-section link label (hero only)
+#   title = full section heading
+#   cue   = scroll-cue wording shown at the foot of the PREVIOUS section
+#   cta   = hero button label (hero only)
 [[params.nav]]
 name = "About"
 title = "About"
 anchor = "about"
+cue = "Scroll to read on"
 cta = "About Me"
 
 [[params.nav]]
 name = "Proof"
 title = "Selected Proof"
 anchor = "proof"
+cue = "Scroll on to read Selected Proof"
 
 [[params.nav]]
 name = "Research"
 title = "Research & Writing"
 anchor = "research"
+cue = "Scroll on to read Research & Writing"
 
 [[params.nav]]
 name = "Speaking"
 title = "Speaking"
 anchor = "speaking"
+cue = "Scroll on to read Speaking"
 
 [[params.nav]]
 name = "Recognition"
 title = "Recognition"
 anchor = "recognition"
+cue = "Scroll on to read Recognition"
 
 [[params.nav]]
 name = "Contact"
 title = "Contact"
 anchor = "contact"
+cue = "Scroll on to get in touch"
 
 [markup.goldmark.renderer]
 unsafe = true
