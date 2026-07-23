@@ -10,11 +10,8 @@ upcoming:
     session: "Proving AI ROI to a CFO: what fails and what survives scrutiny."
     role: "Speaker, Platform & Product track"
 
-  # TODO: confirm with Prerit — the brief names this event "AINordics, Stockholm"; the
-  # previous site listed the same date and city as the "AI & Automation in Finance Summit".
-  # Using the brief's name. Correct here if the previous site was right.
   - date: "15 September 2026"
-    event: "AINordics, Stockholm"
+    event: "Agentic AI in Finance, Stockholm"
     session: "Beyond Workflows: The Rise of Autonomous Operations."
     role: "Speaker / panellist"
 

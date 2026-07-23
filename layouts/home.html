@@ -4,6 +4,14 @@
 {{- $ogImage := site.Params.ogImage | absURL -}}
 {{- $research := index site.Data.research -}}
 {{- $speaking := index site.Data.speaking -}}
+{{- $nav := site.Params.nav -}}
+{{/* anchor -> the nav entry that follows it, so each section can link to the next */}}
+{{- $nextOf := dict -}}
+{{- range $i, $e := $nav -}}
+  {{- if lt (add $i 1) (len $nav) -}}
+    {{- $nextOf = merge $nextOf (dict $e.anchor (index $nav (add $i 1))) -}}
+  {{- end -}}
+{{- end -}}
 <!DOCTYPE html>
 <html lang="en-gb" prefix="og: https://ogp.me/ns#">
 <head>
@@ -97,8 +105,19 @@
       <p class="actions">
         <a class="btn" href="{{ site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a class="btn" href="#contact" data-email-link>Email</a>
-        <a class="btn btn-quiet" href="#research">Read the research</a>
+        {{- with index $nav 0 }}
+        <a class="btn btn-quiet" href="#{{ .anchor }}">{{ or .cta .title }}</a>
+        {{- end }}
       </p>
+
+      {{- with index $nav 0 }}
+      <a class="scroll-cue" href="#{{ .anchor }}">
+        <span class="scroll-cue-text">Scroll to read on</span>
+        <span class="scroll-cue-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><path d="M12 4v14m0 0-6.5-6.5M12 18l6.5-6.5"/></svg>
+        </span>
+      </a>
+      {{- end }}
     </div>
   </section>
 
@@ -109,6 +128,7 @@
       <div class="prose">
         {{ .Content }}
       </div>
+      {{ partial "next-section.html" (index $nextOf "about") }}
     </div>
   </section>
 
@@ -124,6 +144,7 @@
         </li>
         {{- end }}
       </ul>
+      {{ partial "next-section.html" (index $nextOf "proof") }}
     </div>
   </section>
 
@@ -151,6 +172,7 @@
         {{- with .licence }}<p class="entry-licence">{{ . }}</p>{{ end }}
       </article>
       {{- end }}
+      {{ partial "next-section.html" (index $nextOf "research") }}
     </div>
   </section>
 
@@ -175,6 +197,7 @@
       </ul>
       {{- end }}
       {{- end }}
+      {{ partial "next-section.html" (index $nextOf "speaking") }}
     </div>
   </section>
 
@@ -185,11 +208,20 @@
       <ul class="recognition">
         {{- range site.Data.recognition }}
         <li{{ if .muted }} class="muted-item"{{ end }}>
-          <span class="rec-award">{{ .award }}</span>
-          {{- with .body }} <span class="rec-body">{{ . }}</span>{{ end }}
+          <p class="rec-line">
+            <span class="rec-award">{{ .award }}</span>
+            {{- with .body }} <span class="rec-body">{{ . }}</span>{{ end }}
+          </p>
+          {{- with .detail }}<p class="rec-detail">{{ . }}</p>{{ end }}
+          {{- with .url }}
+          <p class="rec-link">
+            <a class="link" href="{{ . }}" target="_blank" rel="noopener noreferrer">View the list</a>
+          </p>
+          {{- end }}
         </li>
         {{- end }}
       </ul>
+      {{ partial "next-section.html" (index $nextOf "recognition") }}
     </div>
   </section>
 
@@ -214,6 +246,13 @@
         <dt>Location</dt>
         <dd>{{ site.Params.location }}</dd>
       </dl>
+
+      <a class="back-to-top" href="#top">
+        <span class="next-chevron up" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><path d="m5 15 7-7 7 7"/></svg>
+        </span>
+        Back to top
+      </a>
     </div>
   </section>
 

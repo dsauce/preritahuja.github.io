@@ -1,0 +1,12 @@
+{{- /* Prominent "keep going" link at the foot of a section. Takes a nav entry. */ -}}
+{{- with . -}}
+<a class="next-section" href="#{{ .anchor }}">
+  <span class="next-text">
+    <span class="next-eyebrow">Next</span>
+    <span class="next-title">{{ or .cta .title }}</span>
+  </span>
+  <span class="next-chevron" aria-hidden="true">
+    <svg viewBox="0 0 24 24" focusable="false"><path d="m5 9 7 7 7-7"/></svg>
+  </span>
+</a>
+{{- end -}}
