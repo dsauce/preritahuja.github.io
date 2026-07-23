@@ -702,7 +702,18 @@ main > section > .wrap > h2 {
   color: var(--muted);
 }
 
-.rec-link { margin-top: 0.7rem; font-size: 0.9375rem; }
+/* Award card. Capped so the fine print on it stays readable without the image
+   dominating the section. */
+.rec-image {
+  width: 100%;
+  max-width: 27.5rem;
+  height: auto;
+  margin-top: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--rule-strong);
+}
+
+.rec-link { margin-top: 0.9rem; font-size: 0.9375rem; }
 
 /* Previous awards: kept in full, sized down so they read as history. */
 #recognition .group-label { margin-top: 2rem; }
