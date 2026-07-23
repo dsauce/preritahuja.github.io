@@ -255,30 +255,6 @@
         <dd>{{ site.Params.location }}</dd>
       </dl>
 
-      {{- with site.Params.linkedinBadge }}
-      {{- if .enabled }}
-      {{/* Both themes are emitted; CSS shows whichever matches the active scheme.
-           main.js injects LinkedIn's script only when this scrolls into view, and
-           reveals the badge only once LinkedIn has rendered it, so a blocked
-           script leaves no broken placeholder behind. */}}
-      <div class="li-badge" id="li-badge">
-        {{- range slice "light" "dark" }}
-        <div class="badge-base LI-profile-badge"
-             data-locale="{{ $.Site.Params.linkedinBadge.locale }}"
-             data-size="{{ $.Site.Params.linkedinBadge.size }}"
-             data-theme="{{ . }}"
-             data-type="{{ $.Site.Params.linkedinBadge.type }}"
-             data-vanity="{{ $.Site.Params.linkedinBadge.vanity }}"
-             data-version="{{ $.Site.Params.linkedinBadge.version }}">
-          <a class="badge-base__link LI-simple-link"
-             href="https://uk.linkedin.com/in/{{ $.Site.Params.linkedinBadge.vanity }}?trk=profile-badge"
-             target="_blank" rel="noopener noreferrer">Prerit A.</a>
-        </div>
-        {{- end }}
-      </div>
-      {{- end }}
-      {{- end }}
-
       <a class="back-to-top" href="#top">
         <span class="back-to-top-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" focusable="false"><path d="M12 20V6m0 0-6.5 6.5M12 6l6.5 6.5"/></svg>
