@@ -12,6 +12,7 @@ description = "Prerit Ahuja. AI and data leader in regulated financial services,
 headshot = "/images/headshot.jpeg"
 ogImage = "/images/headshot.jpeg"
 location = "London"
+founded = 2024   # shown in the footer as "Established <year>"
 linkedin = "https://www.linkedin.com/in/ahujaprerit/"
 orcid = "0009-0004-0147-4192"
 orcidURL = "https://orcid.org/0009-0004-0147-4192"
