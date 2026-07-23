@@ -736,6 +736,32 @@ main > section > .wrap > h2 {
 
 .contact-primary { margin-bottom: 1.75rem; }
 
+/* --- LinkedIn profile badge ----------------------------------------------- */
+
+/* Hidden until LinkedIn's script has swapped in its iframe, so a blocked or
+   failed script shows nothing rather than a stray "Prerit A." link. */
+.li-badge {
+  margin-top: 2rem;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.li-badge .badge-base { display: none; }
+.li-badge iframe { max-width: 100%; }
+
+/* Show the variant matching the active colour scheme. */
+.li-badge.is-ready .badge-base[data-theme="light"] { display: block; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .li-badge.is-ready .badge-base[data-theme="light"] { display: none; }
+  :root:not([data-theme="light"]) .li-badge.is-ready .badge-base[data-theme="dark"] { display: block; }
+}
+
+:root[data-theme="dark"] .li-badge.is-ready .badge-base[data-theme="light"] { display: none; }
+:root[data-theme="dark"] .li-badge.is-ready .badge-base[data-theme="dark"] { display: block; }
+:root[data-theme="light"] .li-badge.is-ready .badge-base[data-theme="light"] { display: block; }
+:root[data-theme="light"] .li-badge.is-ready .badge-base[data-theme="dark"] { display: none; }
+
 /* --- Contact -------------------------------------------------------------- */
 
 .contact {

@@ -16,6 +16,18 @@ linkedin = "https://www.linkedin.com/in/ahujaprerit/"
 orcid = "0009-0004-0147-4192"
 orcidURL = "https://orcid.org/0009-0004-0147-4192"
 
+# LinkedIn profile badge rendered in the Contact section. Loaded from
+# platform.linkedin.com only once Contact scrolls into view, and only shown once
+# LinkedIn has actually rendered it. Set `enabled = false` to remove it entirely.
+# Size options: medium | large | xlarge. Type: HORIZONTAL | VERTICAL.
+[params.linkedinBadge]
+enabled = true
+vanity = "ahujaprerit"
+size = "large"
+type = "HORIZONTAL"
+locale = "en_US"
+version = "v1"
+
 [params.hero]
 headline = "AI & Data Leader in Regulated Financial Services"
 subheadline = "Enterprise AI operating models, built from zero to governed production."
