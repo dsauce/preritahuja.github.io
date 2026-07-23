@@ -209,4 +209,51 @@
     Array.prototype.forEach.call(revealables, function (el) { observer.observe(el); });
   }
 
+  /* --- LinkedIn profile badge --------------------------------------------- */
+  // Third-party script, so it is deferred until the reader actually reaches
+  // Contact. Nothing is requested from LinkedIn before that point.
+
+  var badge = document.getElementById("li-badge");
+
+  if (badge) {
+    var badgeLoaded = false;
+
+    function loadBadge() {
+      if (badgeLoaded) return;
+      badgeLoaded = true;
+
+      // LinkedIn replaces the placeholder markup with an iframe. Only reveal the
+      // badge once that has happened, so a blocked script leaves nothing behind.
+      if ("MutationObserver" in window) {
+        var mo = new MutationObserver(function () {
+          if (badge.querySelector("iframe")) {
+            badge.classList.add("is-ready");
+            mo.disconnect();
+          }
+        });
+        mo.observe(badge, { childList: true, subtree: true });
+        setTimeout(function () { mo.disconnect(); }, 15000);
+      }
+
+      var s = document.createElement("script");
+      s.src = "https://platform.linkedin.com/badges/js/profile.js";
+      s.async = true;
+      s.defer = true;
+      document.body.appendChild(s);
+    }
+
+    if ("IntersectionObserver" in window) {
+      var badgeObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          badgeObserver.disconnect();
+          loadBadge();
+        });
+      }, { rootMargin: "300px" });
+      badgeObserver.observe(badge);
+    } else {
+      loadBadge();
+    }
+  }
+
 })();
