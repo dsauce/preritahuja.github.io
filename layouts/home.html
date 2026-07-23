@@ -269,6 +269,9 @@
 <footer class="site-footer">
   <div class="wrap">
     <p>&copy; {{ now.Year }} Prerit Ahuja</p>
+    {{- with site.Params.founded }}
+    <p class="footer-est">Established {{ . }}</p>
+    {{- end }}
   </div>
 </footer>
 

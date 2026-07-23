@@ -772,6 +772,13 @@ main > section > .wrap > h2 {
   color: var(--muted);
 }
 
+.footer-est {
+  margin-top: 0.2rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
 /* --- Motion --------------------------------------------------------------- */
 
 .js .reveal {
