@@ -23,5 +23,8 @@ entries:
       - label: "Read on SSRN"
         url: "https://ssrn.com/abstract=6865059"
         primary: true
+      - label: "Read on arXiv"
+        url: "https://arxiv.org/abs/2607.21340"
+        primary: true
       - label: "Code & data"
         url: "https://github.com/dsauce/cm-lrs"
