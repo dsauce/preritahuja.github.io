@@ -8,7 +8,7 @@ disableKinds = ["taxonomy", "term", "section", "rss"]
 
 [params]
 author = "Prerit Ahuja"
-description = "Prerit Ahuja. AI and data leader in regulated financial services, building and governing enterprise AI operating models from zero to production. Global CDO Top 100 (2026). London."
+description = "Prerit Ahuja. Enterprise digital and AI leader in regulated financial services: production AI, operating leverage and decision systems, built from zero to governed production. Global CDO Top 100 (2026). London."
 headshot = "/images/headshot.jpeg"
 ogImage = "/images/headshot.jpeg"
 location = "London"

@@ -48,8 +48,8 @@
   "name" "Prerit Ahuja"
   "url" (absURL "/")
   "image" $ogImage
-  "jobTitle" "AI & Data Leader in Regulated Financial Services"
-  "description" "Builds and governs enterprise AI operating models from zero to production in regulated financial services."
+  "jobTitle" "Enterprise Digital & AI Leader"
+  "description" "Enterprise digital and AI leader in regulated financial services. Builds production AI from zero to governed production and turns it into operating leverage and decision systems."
   "address" (dict "@type" "PostalAddress" "addressLocality" "London" "addressCountry" "GB")
   "sameAs" (slice site.Params.linkedin site.Params.orcidURL)
   | jsonify (dict "indent" "  ") | safeJS -}}
@@ -145,11 +145,13 @@
         <blockquote class="callout">{{ . }}</blockquote>
         {{- end }}
 
+        {{- with .links }}
         <p class="entry-links">
-          {{- range .links }}
+          {{- range . }}
           <a class="{{ if .primary }}btn{{ else }}link{{ end }}" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .label }}</a>
           {{- end }}
         </p>
+        {{- end }}
         {{- with .licence }}<p class="entry-licence">{{ . }}</p>{{ end }}
       </article>
       {{- end }}
