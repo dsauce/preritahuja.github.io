@@ -1,0 +1,172 @@
+{{/*
+  Layout for standalone topic pages (see CLAUDE.md, "Topic pages").
+
+  These exist for search, not for site navigation. The home page is a single page and stays
+  that way: nothing here is linked from the home layout or the section nav. Each topic page
+  is its own URL and its own ranking target, built around the ROLE or CONCEPT as the H1,
+  with Prerit as the worked example rather than the subject.
+
+  Front matter drives everything:
+    title       H1 and <title> prefix. This is the term itself, not a person's name.
+    seoTitle    optional override for the <title> tag only
+    description meta description and lead paragraph
+    lead        optional dedicated lead paragraph if it should differ from `description`
+    faq         list of {q, a} pairs, rendered visibly AND as FAQPage structured data
+    seeAlso     list of {label, url} for the See Also block
+*/}}
+{{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
+{{- $js := resources.Get "js/main.js" | minify | fingerprint -}}
+{{- $desc := .Description | default site.Params.description -}}
+{{- $seoTitle := .Params.seoTitle | default (printf "%s | %s" .Title site.Params.author) -}}
+{{- $ogImage := site.Params.ogImage | absURL -}}
+{{- $home := absURL "/" -}}
+{{- $personID := printf "%s#person" $home -}}
+<!DOCTYPE html>
+<html lang="en-gb" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+
+<title>{{ $seoTitle }}</title>
+<meta name="description" content="{{ $desc }}">
+<meta name="author" content="{{ site.Params.author }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+<meta property="og:title" content="{{ $seoTitle }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:image" content="{{ $ogImage }}">
+<meta property="og:image:alt" content="Prerit Ahuja">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ $seoTitle }}">
+<meta name="twitter:description" content="{{ $desc }}">
+<meta name="twitter:image" content="{{ $ogImage }}">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-var.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/source-serif-4-latin-var.woff2" crossorigin>
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+
+<script>(function(){var d=document.documentElement;d.className+=" js";try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.dataset.theme=t;}catch(e){}})();</script>
+
+{{/* Article + DefinedTerm + FAQPage, all authored by the Person entity on the home page.
+     `author` and `about` point at the same @id, which is what ties this topic to him. */}}
+{{- $nodes := slice
+  (dict
+    "@type" (slice "Article" "DefinedTerm")
+    "@id" (printf "%s#article" .Permalink)
+    "headline" .Title
+    "name" .Title
+    "url" .Permalink
+    "description" $desc
+    "inLanguage" "en-GB"
+    "author" (dict "@id" $personID)
+    "publisher" (dict "@id" $personID)
+    "about" (dict "@id" $personID)
+    "mainEntityOfPage" .Permalink
+    "isPartOf" (dict "@id" (printf "%s#website" $home))
+  )
+  (dict
+    "@type" "BreadcrumbList"
+    "itemListElement" (slice
+      (dict "@type" "ListItem" "position" 1 "name" site.Params.author "item" $home)
+      (dict "@type" "ListItem" "position" 2 "name" .Title "item" .Permalink)
+    )
+  )
+-}}
+{{- with .Params.faq -}}
+  {{- $qs := slice -}}
+  {{- range . -}}
+    {{- $qs = $qs | append (dict
+        "@type" "Question"
+        "name" .q
+        "acceptedAnswer" (dict "@type" "Answer" "text" .a)
+      ) -}}
+  {{- end -}}
+  {{- $nodes = $nodes | append (dict "@type" "FAQPage" "mainEntity" $qs) -}}
+{{- end -}}
+<script type="application/ld+json">
+{{- dict "@context" "https://schema.org" "@graph" $nodes | jsonify (dict "indent" "  ") | safeJS -}}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="bar">
+    <a class="wordmark" href="/">{{ site.Params.author }}</a>
+
+    {{/* Anchors are absolute here: this page is not the home page. */}}
+    <nav class="site-nav" id="site-nav" aria-label="Sections">
+      <ul>
+        {{- range site.Params.nav }}
+        <li><a href="/#{{ .anchor }}">{{ .name }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+
+    <div class="bar-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch colour theme">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.6M12 19v2.6M4.4 12H1.8M22.2 12h-2.6M6.3 6.3 4.5 4.5M19.5 19.5l-1.8-1.8M17.7 6.3l1.8-1.8M4.5 19.5l1.8-1.8"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="topic">
+    <div class="wrap">
+      <h1>{{ .Title }}</h1>
+      {{- with .Params.lead | default $desc }}
+      <p class="section-lead">{{ . }}</p>
+      {{- end }}
+
+      <div class="prose">
+        {{ .Content }}
+      </div>
+
+      {{- with .Params.faq }}
+      <h2>Frequently asked questions</h2>
+      <div class="prose">
+        {{- range . }}
+        <h3>{{ .q }}</h3>
+        <p>{{ .a }}</p>
+        {{- end }}
+      </div>
+      {{- end }}
+
+      {{- with .Params.seeAlso }}
+      <h2>See also</h2>
+      <ul class="talks">
+        {{- range . }}
+        <li><a class="link" href="{{ .url }}">{{ .label }}</a></li>
+        {{- end }}
+      </ul>
+      {{- end }}
+
+      <p class="actions" style="margin-top:2.5rem">
+        <a class="btn" href="/">More about Prerit Ahuja</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; {{ now.Year }} {{ site.Params.author }}</p>
+  </div>
+</footer>
+
+<script src="{{ $js.RelPermalink }}" defer></script>
+</body>
+</html>

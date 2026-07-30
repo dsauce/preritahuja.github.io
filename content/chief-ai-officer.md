@@ -1,0 +1,81 @@
+---
+title: "Chief AI Officer"
+seoTitle: "Chief AI Officer in Regulated Financial Services"
+description: "What a Chief AI Officer does in regulated financial services: the mandate, the governance, and the operating model, from a practitioner who built one from zero."
+lead: "A Chief AI Officer owns how artificial intelligence enters an organisation's real decisions: what gets built, what gets approved, who is accountable when the output is wrong, and whether any of it produces operating leverage. In regulated financial services the role is defined less by model choice than by what has to be true before a model is allowed anywhere near a client, a mandate or a filing."
+faq:
+  - q: "What does a Chief AI Officer actually do?"
+    a: "A Chief AI Officer owns the AI operating model rather than individual models: the strategy, the governance framework, the approval path from experiment to production, the data foundation, and the accountability for what AI output is used to decide. In practice the largest part of the job is the part that comes after the model works, because that is where most enterprise AI programmes stall."
+  - q: "How is a Chief AI Officer different from a Chief Data Officer?"
+    a: "A Chief Data Officer is accountable for data as an asset: quality, lineage, access and governance. A Chief AI Officer is accountable for decisions made with that data at machine speed and scale. The two overlap heavily, which is why many institutions combine them into a Chief Data and AI Officer, but the AI mandate adds model risk, human-in-the-loop design and the defensibility of generated output."
+  - q: "Does a regulated firm need a Chief AI Officer?"
+    a: "It needs the function, whatever the title. Someone has to own workflow and skill approval, access control, human oversight design and model risk in one place. Where that ownership is split across technology, risk and the business, AI tends to accumulate as disconnected pilots that never reach production."
+  - q: "What background does a Chief AI Officer need?"
+    a: "Enough technical depth to judge whether a system will hold under load, and enough commercial standing to be trusted with where AI goes in the business. The role sits between engineering, risk and the front office, and it fails on either side alone: a purely technical appointment cannot win the governance argument, and a purely strategic one cannot tell a demonstration from a production system."
+  - q: "Why do most enterprise AI programmes fail to reach production?"
+    a: "Because the constraint is rarely model accuracy. In a controlled study of AI workflows run on fund offering documents, 44% of workflows that cleared a demonstration could not be placed in production, and review burden rather than accuracy set the economics. A workflow that produces a good answer but requires a specialist to check every line has not removed work, it has moved it."
+seeAlso:
+  - label: "Capital Markets LLM Reliability Score (CM-LRS) on arXiv"
+    url: "https://arxiv.org/html/2607.21340v1"
+  - label: "Capital Markets LLM Reliability Score (CM-LRS) on SSRN"
+    url: "https://ssrn.com/abstract=6865059"
+  - label: "Research and writing"
+    url: "/#research"
+  - label: "Speaking"
+    url: "/#speaking"
+---
+
+## Who is a Chief AI Officer?
+
+A Chief AI Officer, sometimes titled Chief AI and Data Officer or Head of AI, is the executive accountable for turning artificial intelligence from a portfolio of experiments into a governed capability the institution can rely on. The remit spans strategy, governance, platform and adoption. The measure of the role is not how much AI exists in the organisation but how much of the organisation's actual work runs through it.
+
+The title emerged as institutions discovered that AI ownership distributed across technology, risk and the business produces pilots rather than production. Someone has to hold the operating model in one place.
+
+## Why regulated financial services reshaped the role
+
+In an unregulated setting, an AI programme can ship on the strength of a good demonstration. In a bank, an asset manager or a capital markets business, it cannot. Output that touches a client, a mandate, a valuation or a public filing has to be defensible to a compliance reviewer and to a regulator, sometimes years later.
+
+That single constraint changes the shape of the job. Model selection becomes one of the smaller decisions. The larger ones are: which workflows are allowed to use AI at all, what human oversight each one requires, how access is controlled, how output is verified, and who signs. A Chief AI Officer in a regulated firm spends more time on approval paths and evidence than on models.
+
+It also changes what counts as success. Adoption metrics are easy to inflate. The durable measure is operating leverage: whether the institution can do materially more without adding proportionate headcount, because analytical and decision-support work moved into live workflows rather than into more people.
+
+## What the role actually owns
+
+- **The AI operating model.** Not a set of tools but a system every practitioner works through: a governed skills library, secure data and tool connectors, retrieval over proprietary data, and applications differentiated by seniority and function.
+- **Governance.** Workflow and skill approval, access control, human-in-the-loop design, and model risk management, documented rather than informal. This is what lets a capability survive an integration, a leadership change or a restructuring without depending on any single expert.
+- **The data foundation.** Proprietary data is the only durable advantage in enterprise AI, because everyone has access to the same models.
+- **Vendor and build decisions.** Which capabilities to buy, which to build, and the evaluation evidence behind firm-wide commitments.
+- **Adoption.** A platform nobody uses is a cost centre. Adoption is a design problem, not a training problem.
+- **Reliability standards.** What level of output quality is required before a given workflow may be placed in production, and how that is measured rather than asserted.
+
+## How the role differs from adjacent titles
+
+A **Chief Data Officer** owns data as an asset. A **Head of Data Science** owns modelling capability. A **CIO** owns the technology estate. A Chief AI Officer owns the decisions made with all three, at machine speed, under regulatory scrutiny. The distinguishing accountability is defensibility: not whether the system produced an answer, but whether the institution can stand behind it.
+
+## What the role looks like in practice
+
+The description above is drawn from building the function rather than observing it.
+
+At DNB Carnegie, [Prerit Ahuja](/) owns the AI and data strategy for the Investment Banking Division, covering more than 300 bankers across Norway, Sweden, Finland, Denmark, the UK, the US and Singapore. The capability was built from foundational data to an AI operating system every banker works through, with a global taskforce of more than fifteen people.
+
+Some specifics of what that involved:
+
+- Consolidating more than ten standalone applications across ECM, DCM, M&A, Loans, Sector Coverage and Debt Advisory into one orchestrated platform on web, MCP and desktop, built on a governed skills library and retrieval over proprietary data.
+- Production applications including BondFinn, retrieval over more than 5,000 bond agreements returning precedents in minutes rather than days; ECMax for ECM investor intelligence; Debex, an AI-first debt advisory knowledge base; and Edgewise, a cited house-view assistant used beyond investment banking.
+- Owning the documented governance framework covering workflow and skill approval, access control, human-in-the-loop design and risk management, which is why the platform and its adoption held through the DNB Markets and Carnegie integration, leadership change and restructuring.
+- Running the evaluation that determined the firm's enterprise-wide LLM deployment, assessing AlphaSense, Hebbia and BlueFlame among others.
+- Building the decision infrastructure divisional leadership runs on: since 2022 the weekly Business Selection Committee has prioritised the deal pipeline and allocated senior banker capacity off quantitative output.
+
+The commercial result was operating leverage rather than activity: organic divisional revenue grew more than 100% against roughly 30% headcount growth on a pre-merger basis, by moving analytical and decision-support work into live workflows instead of adding people.
+
+## The measurement problem
+
+The hardest unsolved question in the role is how far generated output can be trusted inside a regulated workflow. Most organisations answer it by intuition.
+
+The **Capital Markets LLM Reliability Score (CM-LRS)** proposes a seven-dimension reliability metric for LLM output in capital markets workflows, demonstrated across five workflows and four models, scored by four independent judges from three model families with a deterministic verification script. One finding with direct budget consequences: two frontier models were statistically indistinguishable on reliability despite a material difference in cost per call, which argues for choosing models on workflow fit and cost rather than headline quality.
+
+A second study, **The Checking Problem**, examines why workflows clear a pilot and fail production. Run on fund offering documents, it found that 44% of AI workflows clearing a demonstration could not be placed in production, and that review burden rather than accuracy set the economics.
+
+## Core focus areas
+
+Enterprise AI operating models. AI governance in regulated institutions. Agentic AI embedded in live workflows. Retrieval over proprietary data. Model and vendor evaluation. LLM reliability measurement. Operating leverage as the test of whether any of it worked.

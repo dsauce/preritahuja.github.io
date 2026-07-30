@@ -1,6 +1,7 @@
 {{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
 {{- $js := resources.Get "js/main.js" | minify | fingerprint -}}
 {{- $desc := site.Params.description -}}
+{{- $seoTitle := or site.Params.seoTitle site.Title -}}
 {{- $ogImage := site.Params.ogImage | absURL -}}
 {{- $research := index site.Data.research -}}
 {{- $speaking := index site.Data.speaking -}}
@@ -12,12 +13,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 
-<title>{{ site.Title }}</title>
+{{/* `seoTitle` is the SERP headline and browser tab only; the page itself uses site.Title. */}}
+<title>{{ $seoTitle }}</title>
 <meta name="description" content="{{ $desc }}">
 <meta name="author" content="{{ site.Params.author }}">
 <link rel="canonical" href="{{ "/" | absURL }}">
+{{/* Let Google use the full snippet and a large image rather than its conservative defaults. */}}
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
-<meta property="og:title" content="{{ site.Title }}">
+<meta property="og:title" content="{{ $seoTitle }}">
 <meta property="og:description" content="{{ $desc }}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ "/" | absURL }}">
@@ -26,7 +30,7 @@
 <meta property="og:locale" content="en_GB">
 <meta property="og:site_name" content="{{ site.Title }}">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{{ site.Title }}">
+<meta name="twitter:title" content="{{ $seoTitle }}">
 <meta name="twitter:description" content="{{ $desc }}">
 <meta name="twitter:image" content="{{ $ogImage }}">
 
@@ -41,18 +45,73 @@
 {{/* Set the theme before first paint so there is no flash of the wrong scheme. */}}
 <script>(function(){var d=document.documentElement;d.className+=" js";try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.dataset.theme=t;}catch(e){}})();</script>
 
-<script type="application/ld+json">
-{{- dict
-  "@context" "https://schema.org"
+{{/*
+  Structured data. Renders nothing; this is the machine-readable statement of who this
+  person is, what they work on, and which other profiles are the same identity. It is the
+  main lever available without touching visible page content — it is how a search engine
+  or an AI assistant resolves "Prerit Ahuja" to one entity with this site as its home.
+  Everything asserted here must be factually true; see CLAUDE.md.
+*/}}
+{{- $home := absURL "/" -}}
+{{- $personID := printf "%s#person" $home -}}
+
+{{- $person := dict
   "@type" "Person"
-  "name" "Prerit Ahuja"
-  "url" (absURL "/")
+  "@id" $personID
+  "name" site.Params.author
+  "url" $home
+  "mainEntityOfPage" $home
   "image" $ogImage
-  "jobTitle" "Enterprise Digital & AI Leader"
+  "jobTitle" site.Params.employer.jobTitle
   "description" "Enterprise digital and AI leader in regulated financial services. Builds production AI from zero to governed production and turns it into operating leverage and decision systems."
-  "address" (dict "@type" "PostalAddress" "addressLocality" "London" "addressCountry" "GB")
-  "sameAs" (slice site.Params.linkedin site.Params.orcidURL)
-  | jsonify (dict "indent" "  ") | safeJS -}}
+  "worksFor" (dict "@type" "Organization" "name" site.Params.employer.name "url" site.Params.employer.url)
+  "alumniOf" (dict "@type" "CollegeOrUniversity" "name" "Indian Institute of Technology Madras")
+  "address" (dict "@type" "PostalAddress" "addressLocality" site.Params.location "addressCountry" "GB")
+  "workLocation" (dict "@type" "Place" "address" (dict "@type" "PostalAddress" "addressLocality" site.Params.location "addressCountry" "GB"))
+  "knowsAbout" site.Params.knowsAbout
+  "identifier" (dict "@type" "PropertyValue" "propertyID" "ORCID" "value" site.Params.orcid "url" site.Params.orcidURL)
+  "sameAs" site.Params.sameAs
+-}}
+
+{{/* Awards come from the same data file that renders the Recognition section, so the
+     structured data cannot drift out of sync with the page. */}}
+{{- $awards := slice -}}
+{{- range site.Data.recognition -}}
+  {{- $a := .award -}}
+  {{- with .body }}{{ $a = printf "%s, %s" $a . }}{{ end -}}
+  {{- $awards = $awards | append $a -}}
+{{- end -}}
+{{- with $awards }}{{ $person = merge $person (dict "award" .) }}{{ end }}
+
+{{- $nodes := slice $person (dict
+  "@type" "WebSite"
+  "@id" (printf "%s#website" $home)
+  "url" $home
+  "name" site.Title
+  "inLanguage" "en-GB"
+  "about" (dict "@id" $personID)
+  "publisher" (dict "@id" $personID)
+) -}}
+
+{{/* Each published paper becomes its own node, authored by the Person above. */}}
+{{- range $e := $research.entries -}}
+  {{- $urls := slice -}}
+  {{- range $e.links -}}{{- $urls = $urls | append .url -}}{{- end -}}
+  {{- with $urls -}}
+    {{- $nodes = $nodes | append (dict
+      "@type" "ScholarlyArticle"
+      "headline" $e.title
+      "name" $e.title
+      "author" (dict "@id" $personID)
+      "datePublished" $e.year
+      "description" (chomp $e.description)
+      "url" (index . 0)
+      "sameAs" .
+    ) -}}
+  {{- end -}}
+{{- end -}}
+<script type="application/ld+json">
+{{- dict "@context" "https://schema.org" "@graph" $nodes | jsonify (dict "indent" "  ") | safeJS -}}
 </script>
 </head>
 
@@ -88,7 +147,8 @@
   <section class="hero" id="top">
     <div class="wrap">
       <img class="headshot" src="{{ site.Params.headshot }}" width="400" height="400"
-           alt="Prerit Ahuja" fetchpriority="high" decoding="async">
+           alt="Prerit Ahuja, {{ site.Params.employer.jobTitle }} at {{ site.Params.employer.name }}"
+           fetchpriority="high" decoding="async">
       <h1>Prerit Ahuja</h1>
       <p class="headline">{{ site.Params.hero.headline }}</p>
       <p class="subheadline">{{ site.Params.hero.subheadline }}</p>

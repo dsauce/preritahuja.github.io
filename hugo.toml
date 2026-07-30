@@ -8,7 +8,17 @@ disableKinds = ["taxonomy", "term", "section", "rss"]
 
 [params]
 author = "Prerit Ahuja"
-description = "Prerit Ahuja. Enterprise digital and AI leader in regulated financial services: production AI, operating leverage and decision systems, built from zero to governed production. Global CDO Top 100 (2026). London."
+
+# `seoTitle` is the <title> tag: the browser tab and the blue link in search results.
+# It is NOT rendered anywhere on the page — the wordmark, the H1, the OG site name and
+# the JSON-LD `name` all stay the plain `title` above. Google truncates the SERP headline
+# around 60 characters, so keep it under that and lead with the name.
+seoTitle = "Prerit Ahuja | Global AI & Data Strategy, DNB Carnegie"
+
+# Meta description. Not rendered on the page; it is the grey snippet under the search
+# result. Google truncates around 155 characters.
+description = "Prerit Ahuja, Director of Global AI and Data Strategy at DNB Carnegie. Enterprise AI in regulated financial services. Global CDO 100 (2026). London."
+
 headshot = "/images/headshot.jpeg"
 ogImage = "/images/headshot.jpeg"
 location = "London"
@@ -17,6 +27,48 @@ linkedin = "https://www.linkedin.com/in/ahujaprerit/"
 orcid = "0009-0004-0147-4192"
 orcidURL = "https://orcid.org/0009-0004-0147-4192"
 
+# ---------------------------------------------------------------------------
+# Entity signals. None of this renders on the page — it feeds the JSON-LD block
+# in layouts/home.html, which is how search engines and AI assistants work out
+# that the scattered profiles below are all one person, with this site as the hub.
+#
+# TOML scoping matters here: these arrays must stay ABOVE the [params.employer]
+# table. Anything written after a table header belongs to that table, not to [params].
+# ---------------------------------------------------------------------------
+
+# `sameAs` is the identity-consolidation list: other profiles that are provably you.
+# Only add profiles you actually control and want associated with your professional
+# identity — each one is a claim that it is the same person.
+sameAs = [
+  "https://www.linkedin.com/in/ahujaprerit/",
+  "https://orcid.org/0009-0004-0147-4192",
+  "https://github.com/dsauce",
+  "https://x.com/ahujaprerit",
+  "https://kinfos.events/speakers/prerit-ahuja/",
+]
+
+# Topics this person is an authority on. Feeds `knowsAbout` in the JSON-LD. This is the
+# legitimate way to state topical expertise without putting keywords on the page.
+knowsAbout = [
+  "Chief AI Officer",
+  "Enterprise AI strategy",
+  "AI governance",
+  "AI operating models",
+  "Production AI systems",
+  "Regulated financial services",
+  "Investment banking technology",
+  "Capital markets",
+  "Large language model reliability",
+  "Agentic AI",
+  "Retrieval-augmented generation",
+  "Data strategy",
+  "Machine learning in banking",
+]
+
+[params.employer]
+name = "DNB Carnegie"
+url = "https://www.dnbcarnegie.com/"
+jobTitle = "Director, Global AI and Data Strategy"
 
 [params.hero]
 headline = "Enterprise Digital & AI Leader | Production AI, Operating Leverage & Decision Systems"

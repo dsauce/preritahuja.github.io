@@ -43,6 +43,27 @@ Twitter), `linkedin`, `orcid`, `headshot`.
 
 To add a section: add a nav entry and add the matching `<section id="…">` to the layout.
 
+### Topic pages → `content/<term>.md` + `layouts/page.html`
+
+Standalone pages that exist **for search, not for navigation**. The home page stays a single
+page: topic pages are deliberately *not* linked from the home layout or the section nav.
+
+The pattern, which is what makes them rank: the **H1 is the role or concept, not a person's
+name**. The page answers the definitional question a searcher actually asked, and Prerit
+appears as the worked example under "What the role looks like in practice", linked back to
+`/`. A bio page cannot rank for "chief AI officer"; a page *about* the role can, and the
+reader who lands on it finds a practitioner.
+
+Front matter drives the layout: `title` (the H1), `seoTitle`, `description`, `lead`, `faq`
+(list of `q`/`a`, rendered visibly **and** as `FAQPage` structured data), `seeAlso`.
+
+Every factual claim in these pages must be traceable to the CV or a published paper. The
+credibility of the practitioner section is the only thing distinguishing these from the
+generic consultancy explainers they compete with.
+
+Existing: `chief-ai-officer.md`. Natural siblings: AI governance, enterprise AI operating
+models, agentic AI in banking, LLM reliability. Each should link to the others.
+
 ### Layout / styling
 - `layouts/home.html` — the whole page
 - `layouts/_partials/scroll-cue.html` — the hero scroll affordance
