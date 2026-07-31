@@ -127,6 +127,16 @@
   <section class="topic">
     <div class="wrap">
       <h1>{{ .Title }}</h1>
+
+      {{/* A visitor arriving cold from search must know whose page this is before they
+           read a word of it, otherwise a topic page reads as an anonymous encyclopedia
+           entry. This is the fix for that, not a redirect: redirecting would deindex
+           the page and defeat its entire purpose. */}}
+      <p class="topic-byline">
+        Written by <a class="link" href="/">{{ site.Params.author }}</a>,
+        {{ site.Params.employer.jobTitle }} at {{ site.Params.employer.name }}
+      </p>
+
       {{- with .Params.lead | default $desc }}
       <p class="section-lead">{{ . }}</p>
       {{- end }}
@@ -154,9 +164,21 @@
       </ul>
       {{- end }}
 
-      <p class="actions" style="margin-top:2.5rem">
-        <a class="btn" href="/">More about Prerit Ahuja</a>
-      </p>
+      {{/* Closing author card: turns the exit from this page into a route to the site
+           rather than a dead end. */}}
+      <aside class="author-card">
+        <img src="{{ site.Params.headshot }}" width="400" height="400" loading="lazy" decoding="async"
+             alt="{{ site.Params.author }}, {{ site.Params.employer.jobTitle }} at {{ site.Params.employer.name }}">
+        <div>
+          <p class="author-name">{{ site.Params.author }}</p>
+          <p class="author-role">{{ site.Params.employer.jobTitle }}, {{ site.Params.employer.name }}. {{ site.Params.location }}.</p>
+          <p class="author-blurb">Builds and runs enterprise AI in regulated financial services: the operating model, the governance, and the production systems that let senior leadership rely on AI inside real decisions.</p>
+          <p class="actions">
+            <a class="btn" href="/">More about {{ site.Params.author }}</a>
+            <a class="btn btn-quiet" href="{{ site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </p>
+        </div>
+      </aside>
     </div>
   </section>
 </main>
