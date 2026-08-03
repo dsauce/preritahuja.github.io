@@ -13,12 +13,14 @@ faq:
   - q: "What background does a Chief AI Officer need?"
     a: "Enough technical depth to judge whether a system will hold under load, and enough commercial standing to be trusted with where AI goes in the business. The role sits between engineering, risk and the front office, and it fails on either side alone: a purely technical appointment cannot win the governance argument, and a purely strategic one cannot tell a demonstration from a production system."
   - q: "Why do most enterprise AI programmes fail to reach production?"
-    a: "Because the constraint is rarely model accuracy. In a controlled study of AI workflows run on fund offering documents, 44% of workflows that cleared a demonstration could not be placed in production, and review burden rather than accuracy set the economics. A workflow that produces a good answer but requires a specialist to check every line has not removed work, it has moved it."
+    a: "Because the constraint is rarely model accuracy. In a controlled study of six document-heavy workflows run across four model families and three tool configurations, 57 of 72 configurations cleared a demonstration bar but only 32 cleared a production bar requiring sustained accuracy, reproducibility, verifiable attribution and a meaningful confidence signal. Review burden rather than accuracy sets the economics: a workflow that produces a good answer but requires a specialist to check every line has not removed work, it has moved it."
 seeAlso:
   - label: "Capital Markets LLM Reliability Score (CM-LRS) on arXiv"
     url: "https://arxiv.org/html/2607.21340v1"
   - label: "Capital Markets LLM Reliability Score (CM-LRS) on SSRN"
     url: "https://ssrn.com/abstract=6865059"
+  - label: "The Checking Problem: What Must Be True Before AI Ships in a Regulated Firm, on arXiv"
+    url: "https://arxiv.org/abs/2607.28666"
   - label: "Research and writing"
     url: "/#research"
   - label: "Speaking"
@@ -74,7 +76,9 @@ The hardest unsolved question in the role is how far generated output can be tru
 
 The **Capital Markets LLM Reliability Score (CM-LRS)** proposes a seven-dimension reliability metric for LLM output in capital markets workflows, demonstrated across five workflows and four models, scored by four independent judges from three model families with a deterministic verification script. One finding with direct budget consequences: two frontier models were statistically indistinguishable on reliability despite a material difference in cost per call, which argues for choosing models on workflow fit and cost rather than headline quality.
 
-A second study, **The Checking Problem**, examines why workflows clear a pilot and fail production. Run on fund offering documents, it found that 44% of AI workflows clearing a demonstration could not be placed in production, and that review burden rather than accuracy set the economics.
+A second study, [**The Checking Problem**](https://arxiv.org/abs/2607.28666), measures why workflows clear a pilot and fail production. Six document-heavy workflows of the kind performed daily in regulated financial services were run across four model families and three tool configurations, producing 5,093 scored output elements across 72 configurations. Each was assessed twice: against a demonstration bar, meaning one correct run on one case, and against a production bar requiring sustained accuracy, reproducibility across repeats, verifiable attribution and a confidence signal that carries information. 57 configurations cleared the demonstration bar. Only 32 cleared the production bar, a survival rate of 56.1%.
+
+The more useful finding is about review burden. A tool that states no confidence requires review of 100% of its output, because it gives the reviewer no basis for triage. Requiring it to cite sources and state a confidence cuts that to 49%. Adding a self-verification pass costs 2.3 times the latency, reaches 44%, and is the only configuration that fails to hold the error tolerance. The value of an AI workflow is therefore set less by how often it is right than by how much of it a human must still check, which is measurable and rarely measured.
 
 ## Core focus areas
 

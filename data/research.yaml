@@ -33,8 +33,23 @@ entries:
   - title: "The Checking Problem: What Must Be True Before AI Ships in a Regulated Firm"
     author: "P. Ahuja"
     year: "2026"
-    venue: "Working paper, submitted"
+    venue: "arXiv"
     description: >-
-      A controlled study of why AI workflows clear a pilot and fail production, run on fund
-      offering documents. 44% of AI workflows that clear a demonstration cannot be placed in
-      production, and review burden rather than accuracy sets the economics.
+      A controlled study of why enterprise AI programmes stall. Six document-heavy workflows
+      of the kind performed daily in regulated financial services, run across four model
+      families and three tool configurations, three times each: 5,093 scored output elements
+      across 72 configurations. 57 cleared a demonstration bar; 32 cleared a production bar
+      requiring sustained accuracy, reproducibility across repeats, verifiable attribution
+      and a confidence signal that carries information. A survival rate of 56.1%.
+    pullquote: >-
+      A tool that states no confidence requires review of 100% of its output, because it
+      offers a reviewer no basis for triage. Requiring it to cite sources and state a
+      confidence reduces that to 49%. The value of an AI workflow is set less by how often
+      it is right than by how much of it a human must still check.
+    licence: "CC BY 4.0"
+    links:
+      - label: "Read on arXiv"
+        url: "https://arxiv.org/html/2607.28666v1"
+        primary: true
+      - label: "PDF"
+        url: "https://arxiv.org/pdf/2607.28666"
