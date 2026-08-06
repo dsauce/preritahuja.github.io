@@ -33,7 +33,7 @@ entries:
   - title: "The Checking Problem: What Must Be True Before AI Ships in a Regulated Firm"
     author: "P. Ahuja"
     year: "2026"
-    venue: "arXiv"
+    venue: "arXiv & SSRN"
     description: >-
       A controlled study of why enterprise AI programmes stall. Six document-heavy workflows
       of the kind performed daily in regulated financial services, run across four model
@@ -48,6 +48,9 @@ entries:
       it is right than by how much of it a human must still check.
     licence: "CC BY 4.0"
     links:
+      - label: "Read on SSRN"
+        url: "https://ssrn.com/abstract=7177719"
+        primary: true
       - label: "Read on arXiv"
         url: "https://arxiv.org/html/2607.28666v1"
         primary: true

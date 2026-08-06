@@ -21,6 +21,8 @@ seeAlso:
     url: "https://ssrn.com/abstract=6865059"
   - label: "The Checking Problem: What Must Be True Before AI Ships in a Regulated Firm, on arXiv"
     url: "https://arxiv.org/abs/2607.28666"
+  - label: "The Checking Problem: What Must Be True Before AI Ships in a Regulated Firm, on SSRN"
+    url: "https://ssrn.com/abstract=7177719"
   - label: "Research and writing"
     url: "/#research"
   - label: "Speaking"
