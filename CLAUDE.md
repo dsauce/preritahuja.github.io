@@ -73,8 +73,8 @@ credibility of the practitioner section is the only thing distinguishing these f
 generic consultancy explainers they compete with.
 
 Existing: `chief-ai-officer.md`, `ai-governance-in-banking.md`, `agentic-ai-in-capital-markets.md`,
-`llm-reliability.md`, and the keynote write-up `proving-ai-roi-to-a-cfo.md` (slides hosted,
-noindexed, at `static/slides/proving-ai-roi-to-a-cfo/`). Each links to the others via `seeAlso`.
+`llm-reliability.md`, and the keynote write-up `proving-ai-roi-to-a-cfo.md`. Do not publish
+slide decks; the write-up is the public version of a talk. Each links to the others via `seeAlso`.
 Keep `static/llms.txt` in step when adding pages or talks.
 
 ### Layout / styling

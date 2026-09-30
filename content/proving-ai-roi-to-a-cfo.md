@@ -13,8 +13,6 @@ faq:
   - q: "What makes AI returns durable?"
     a: "Reliability and governance. The system shows its sources, is measurably right, fails safely and leaves a trail, and someone can say who may use it, which version said what, who signed it off and who is watching it."
 seeAlso:
-  - label: "View the slides"
-    url: "/slides/proving-ai-roi-to-a-cfo/"
   - label: "The Checking Problem, on arXiv"
     url: "https://arxiv.org/abs/2607.28666"
   - label: "Capital Markets LLM Reliability Score, on arXiv"
