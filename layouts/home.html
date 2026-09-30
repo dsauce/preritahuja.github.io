@@ -115,8 +115,8 @@
     ) -}}
   {{- end -}}
 {{- end -}}
-{{/* Past talks with a fixed date become Event nodes with this person as performer. */}}
-{{- range $t := $speaking.past -}}
+{{/* Talks with a fixed date become Event nodes with this person as performer. */}}
+{{- range $t := $speaking.upcoming | append $speaking.past -}}
   {{- with $t.isoDate -}}
     {{- $ev := dict
       "@type" "Event"
@@ -370,6 +370,11 @@
       <dl class="contact">
         <dt>ORCID</dt>
         <dd><a class="link" href="{{ site.Params.orcidURL }}" target="_blank" rel="noopener noreferrer">{{ site.Params.orcid }}</a></dd>
+
+        {{- with site.Params.scholar }}
+        <dt>Google Scholar</dt>
+        <dd><a class="link" href="{{ . }}" target="_blank" rel="noopener noreferrer">Profile</a></dd>
+        {{- end }}
 
         <dt>Location</dt>
         <dd>{{ site.Params.location }}</dd>

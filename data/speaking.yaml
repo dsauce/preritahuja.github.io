@@ -7,7 +7,9 @@
 intro: "Selected speaking engagements."
 
 upcoming:
-  - date: "November 2026"
+  - date: "25 November 2026"
+    isoDate: "2026-11-25"
+    location: "London Marriott Hotel Grosvenor Square"
     event: "AI in Financial Services: Deep Dive, London"
     role: "Solo session"
 

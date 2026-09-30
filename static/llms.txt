@@ -8,6 +8,7 @@ Focus: enterprise AI strategy, AI governance and reliability, and taking AI from
 - [Home and profile](https://preritahuja.com/): about, selected proof, research, speaking, recognition
 - [LinkedIn](https://www.linkedin.com/in/ahujaprerit/)
 - [ORCID 0009-0004-0147-4192](https://orcid.org/0009-0004-0147-4192)
+- [Google Scholar](https://scholar.google.com/citations?user=-yXHlvMAAAAJ)
 
 ## Research
 - [Capital Markets LLM Reliability Score (CM-LRS): From Plausible to Bankable](https://arxiv.org/html/2607.21340v1): a seven-dimension reliability metric for LLM output in capital-markets workflows (arXiv & SSRN, 2026)
@@ -16,7 +17,7 @@ Focus: enterprise AI strategy, AI governance and reliability, and taking AI from
 ## Talks
 - [Proving AI ROI to a CFO](https://preritahuja.com/proving-ai-roi-to-a-cfo/): solo keynote, AI in Financial Services Europe, London, September 2026
 - Agentic AI & Automation in Finance Summit, Stockholm (September 2026); AI in Capital Markets Summit, London (June 2026); Data Management Summit, London (March 2026)
-- Upcoming: AI in Financial Services: Deep Dive, London (November 2026)
+- Upcoming: AI in Financial Services: Deep Dive, London (25 November 2026)
 
 ## Topics
 - [Chief AI Officer](https://preritahuja.com/chief-ai-officer/)

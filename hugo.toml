@@ -26,6 +26,7 @@ founded = 2024   # shown in the footer as "Established <year>"
 linkedin = "https://www.linkedin.com/in/ahujaprerit/"
 orcid = "0009-0004-0147-4192"
 orcidURL = "https://orcid.org/0009-0004-0147-4192"
+scholar = "https://scholar.google.com/citations?user=-yXHlvMAAAAJ"
 
 # ---------------------------------------------------------------------------
 # Entity signals. None of this renders on the page — it feeds the JSON-LD block
@@ -42,6 +43,7 @@ orcidURL = "https://orcid.org/0009-0004-0147-4192"
 sameAs = [
   "https://www.linkedin.com/in/ahujaprerit/",
   "https://orcid.org/0009-0004-0147-4192",
+  "https://scholar.google.com/citations?user=-yXHlvMAAAAJ",
   "https://github.com/dsauce",
   "https://kinfos.events/speakers/prerit-ahuja/",
 ]
