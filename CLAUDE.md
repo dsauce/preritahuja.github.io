@@ -6,7 +6,15 @@ GitHub Pages via `.github/workflows/hugo.yml` on push to `main`. Custom domain:
 
 Everything lives on the home route. Sections in order: Hero (`#top`), About (`#about`),
 Selected Proof (`#proof`), Research & Writing (`#research`), Speaking (`#speaking`),
-Recognition (`#recognition`), Contact (`#contact`), footer.
+Speaker Kit (`#speaker-kit`), Recognition (`#recognition`), Contact (`#contact`), footer.
+
+## Content rule: headlines, not detail
+
+The site is deliberately high level. It should tell a reader enough to want the CV, not replace
+it. **No employer revenue or dollar figures, no adoption or usage statistics, no internal product
+names or build details** (for example "built in three days"). Those belong in the CV. Published
+research findings are fine, because they are public. `WEBSITE_ACTIONS.md` is a historical
+note from May 2026; its employer-neutral rule is obsolete (the site names DNB Carnegie).
 
 ## Where to edit what
 
@@ -18,7 +26,9 @@ These drive the page directly. Edit the YAML, rebuild, done. No layout changes n
   description, optional `pullquote`, `licence`, and a `links` list where one link may be
   `primary: true` to render as a button)
 - `data/speaking.yaml` — `intro`, `upcoming`, `past`. Grouping is **manual, not date-driven**:
-  when an event passes, move the entry from `upcoming` to `past`.
+  when an event passes, move the entry from `upcoming` to `past`. Optional per talk: `url`
+  (renders "Read the talk"), `isoDate` + `location` (emit an `Event` node in the JSON-LD).
+  The `kit` block drives the Speaker Kit section (bios, topics, headshot).
 - `data/recognition.yaml` — awards (`award`, `body`, optional `url` and `detail`).
   `muted: true` moves an entry out of the lead card and under the **Previous Awards**
   sub-header, rendered smaller. Entries without it are lead cards.
@@ -28,6 +38,7 @@ The body markdown renders into the About section. Front matter `aliases` emit re
 stubs for retired routes.
 
 ### Hero, meta, identifiers → `hugo.toml`
+`sameAs` lists profiles he controls; `subjectOf` lists independent pages verified to name him.
 `[params.hero]` (headline, subheadline, microline), `description` (used for meta, OG and
 Twitter), `linkedin`, `orcid`, `headshot`.
 
@@ -61,8 +72,10 @@ Every factual claim in these pages must be traceable to the CV or a published pa
 credibility of the practitioner section is the only thing distinguishing these from the
 generic consultancy explainers they compete with.
 
-Existing: `chief-ai-officer.md`. Natural siblings: AI governance, enterprise AI operating
-models, agentic AI in banking, LLM reliability. Each should link to the others.
+Existing: `chief-ai-officer.md`, `ai-governance-in-banking.md`, `agentic-ai-in-capital-markets.md`,
+`llm-reliability.md`, and the keynote write-up `proving-ai-roi-to-a-cfo.md` (slides hosted,
+noindexed, at `static/slides/proving-ai-roi-to-a-cfo/`). Each links to the others via `seeAlso`.
+Keep `static/llms.txt` in step when adding pages or talks.
 
 ### Layout / styling
 - `layouts/home.html` — the whole page

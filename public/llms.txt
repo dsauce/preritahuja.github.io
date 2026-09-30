@@ -1,0 +1,28 @@
+# Prerit Ahuja
+
+> Prerit Ahuja is Director, Global AI and Data Strategy at DNB Carnegie, based in London. He built the investment banking division's AI and data capability from zero into a governed platform of production AI used daily across the Nordics, the UK, the US and Singapore, and leads the division's global AI taskforce. HotTopics Global CDO 100 (2026). Author of the Capital Markets LLM Reliability Score and The Checking Problem.
+
+Focus: enterprise AI strategy, AI governance and reliability, and taking AI from pilot to production in regulated financial services. Contact is via LinkedIn only; a CV is available on request.
+
+## About
+- [Home and profile](https://preritahuja.com/): about, selected proof, research, speaking, recognition
+- [LinkedIn](https://www.linkedin.com/in/ahujaprerit/)
+- [ORCID 0009-0004-0147-4192](https://orcid.org/0009-0004-0147-4192)
+
+## Research
+- [Capital Markets LLM Reliability Score (CM-LRS): From Plausible to Bankable](https://arxiv.org/html/2607.21340v1): a seven-dimension reliability metric for LLM output in capital-markets workflows (arXiv & SSRN, 2026)
+- [The Checking Problem: What Must Be True Before AI Ships in a Regulated Firm](https://arxiv.org/abs/2607.28666): a controlled study of why AI that passes a demo fails in production (arXiv & SSRN, 2026)
+
+## Talks
+- [Proving AI ROI to a CFO](https://preritahuja.com/proving-ai-roi-to-a-cfo/): solo keynote, AI in Financial Services Europe, London, September 2026
+- Agentic AI & Automation in Finance Summit, Stockholm (September 2026); AI in Capital Markets Summit, London (June 2026); Data Management Summit, London (March 2026)
+- Upcoming: AI in Financial Services: Deep Dive, London (November 2026)
+
+## Topics
+- [Chief AI Officer](https://preritahuja.com/chief-ai-officer/)
+- [AI governance in banking](https://preritahuja.com/ai-governance-in-banking/)
+- [Agentic AI in capital markets](https://preritahuja.com/agentic-ai-in-capital-markets/)
+- [LLM reliability in financial services](https://preritahuja.com/llm-reliability/)
+
+## Speaker kit
+- [Bios, topics and headshot](https://preritahuja.com/#speaker-kit)

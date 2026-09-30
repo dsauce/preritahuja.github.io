@@ -23,6 +23,14 @@ seeAlso:
     url: "https://arxiv.org/abs/2607.28666"
   - label: "The Checking Problem: What Must Be True Before AI Ships in a Regulated Firm, on SSRN"
     url: "https://ssrn.com/abstract=7177719"
+  - label: "AI governance in banking"
+    url: "/ai-governance-in-banking/"
+  - label: "Agentic AI in capital markets"
+    url: "/agentic-ai-in-capital-markets/"
+  - label: "LLM reliability in financial services"
+    url: "/llm-reliability/"
+  - label: "Proving AI ROI to a CFO"
+    url: "/proving-ai-roi-to-a-cfo/"
   - label: "Research and writing"
     url: "/#research"
   - label: "Speaking"
@@ -60,17 +68,17 @@ A **Chief Data Officer** owns data as an asset. A **Head of Data Science** owns 
 
 The description above is drawn from building the function rather than observing it.
 
-At DNB Carnegie, [Prerit Ahuja](/) owns the AI and data strategy for the Investment Banking Division, covering more than 300 bankers across Norway, Sweden, Finland, Denmark, the UK, the US and Singapore. The capability was built from foundational data to an AI operating system every banker works through, with a global taskforce of more than fifteen people.
+At DNB Carnegie, [Prerit Ahuja](/) owns the AI and data strategy for the Investment Banking Division, covering bankers across the Nordics, the UK, the US and Singapore, and leads the division's global AI taskforce. The capability was built from foundational data to an AI operating system that bankers use every day.
 
-Some specifics of what that involved:
+What that involved, at headline level:
 
-- Consolidating more than ten standalone applications across ECM, DCM, M&A, Loans, Sector Coverage and Debt Advisory into one orchestrated platform on web, MCP and desktop, built on a governed skills library and retrieval over proprietary data.
-- Production applications including BondFinn, retrieval over more than 5,000 bond agreements returning precedents in minutes rather than days; ECMax for ECM investor intelligence; Debex, an AI-first debt advisory knowledge base; and Edgewise, a cited house-view assistant used beyond investment banking.
-- Owning the documented governance framework covering workflow and skill approval, access control, human-in-the-loop design and risk management, which is why the platform and its adoption held through the DNB Markets and Carnegie integration, leadership change and restructuring.
-- Running the evaluation that determined the firm's enterprise-wide LLM deployment, assessing AlphaSense, Hebbia and BlueFlame among others.
-- Building the decision infrastructure divisional leadership runs on: since 2022 the weekly Business Selection Committee has prioritised the deal pipeline and allocated senior banker capacity off quantitative output.
+- A governed platform of production AI applications across ECM, DCM, M&A, Loans, Sector Coverage and Debt Advisory, built on proprietary data and orchestrated across web, MCP and desktop.
+- Retrieval and knowledge systems over transaction documents and research, so bankers get precedents and answers on demand rather than after days of searching.
+- A documented governance framework covering workflow approval, access control, human-in-the-loop design and risk management, which is why the platform and its adoption held through a merger, leadership change and restructuring.
+- Leading the frontier model and vendor evaluations behind the firm's enterprise-wide AI deployment.
+- Advising divisional and group leadership on the investor and market insight they use in public and with the media.
 
-The commercial result was operating leverage rather than activity: organic divisional revenue grew more than 100% against roughly 30% headcount growth on a pre-merger basis, by moving analytical and decision-support work into live workflows instead of adding people.
+The commercial result was operating leverage rather than activity: revenue grew substantially faster than headcount, because analytical and decision-support work moved into live workflows instead of into more people.
 
 ## The measurement problem
 

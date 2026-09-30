@@ -46,6 +46,15 @@ sameAs = [
   "https://kinfos.events/speakers/prerit-ahuja/",
 ]
 
+# Independent pages that describe this person (speaker profiles, published lists). Feeds
+# `subjectOf` in the JSON-LD. Unlike `sameAs`, these are pages ABOUT the person that he does
+# not control. Only add pages verified to name him.
+subjectOf = [
+  "https://kinfos.events/speakers/prerit-ahuja/",
+  "https://a-teaminsight.com/blog/experts-to-take-stock-of-data-silos-and-lineage-dms-london-preview/",
+  "https://hottopics.ht/awards/global-cdo-100-awards-data#cdo100",
+]
+
 # Topics this person is an authority on. Feeds `knowsAbout` in the JSON-LD. This is the
 # legitimate way to state topical expertise without putting keywords on the page.
 knowsAbout = [
@@ -70,8 +79,8 @@ url = "https://www.dnbcarnegie.com/"
 jobTitle = "Director, Global AI and Data Strategy"
 
 [params.hero]
-headline = "Enterprise Digital & AI Leader | Production AI, Operating Leverage & Decision Systems"
-subheadline = "Enterprise AI operating models, built from zero to governed production."
+headline = "Enterprise AI & Data Leader | Production AI in Regulated Financial Services"
+subheadline = "I take AI from strategy to daily use, not to pilot."
 microline = "London · Global CDO Top 100 (2026)"
 
 # Drives the sticky section nav, in order.
@@ -100,6 +109,11 @@ anchor = "research"
 name = "Speaking"
 title = "Speaking"
 anchor = "speaking"
+
+[[params.nav]]
+name = "Speaker Kit"
+title = "Speaker Kit"
+anchor = "speaker-kit"
 
 [[params.nav]]
 name = "Recognition"

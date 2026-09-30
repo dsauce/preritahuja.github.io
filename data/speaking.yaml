@@ -1,26 +1,81 @@
 # Speaking (#speaking). Two groups: upcoming and past.
 # When an upcoming event passes, move the entry into `past` — nothing is date-driven here,
 # so the grouping stays correct without a rebuild schedule.
+# Optional `url` renders a "Read the talk" link (e.g. a write-up page).
+# Optional `isoDate` (YYYY-MM-DD) feeds the Event structured data; omit if not fixed.
 
 intro: "Selected speaking engagements."
 
 upcoming:
-  - date: "8–9 September 2026"
-    event: "AIFS London (Arena International)"
-    session: "Proving AI ROI to a CFO: what fails and what survives scrutiny."
-    role: "Speaker, Platform & Product track"
-
-  - date: "15 September 2026"
-    event: "Agentic AI in Finance, Stockholm"
-    session: "Beyond Workflows: The Rise of Autonomous Operations."
-    role: "Speaker / panellist"
+  - date: "November 2026"
+    event: "AI in Financial Services: Deep Dive, London"
+    role: "Solo session"
 
 past:
+  - date: "15 September 2026"
+    isoDate: "2026-09-15"
+    location: "Stockholm"
+    event: "Agentic AI & Automation in Finance Summit, Stockholm"
+    session: "Beyond Workflows: The Rise of Autonomous Operations."
+    role: "Panel"
+
+  - date: "8 September 2026"
+    isoDate: "2026-09-08"
+    location: "London"
+    event: "AI in Financial Services Europe, London"
+    session: "Proving AI ROI to a CFO: what fails, and what survives scrutiny."
+    role: "Solo keynote"
+    url: "/proving-ai-roi-to-a-cfo/"
+
   - date: "17 June 2026"
+    isoDate: "2026-06-17"
+    location: "London"
     event: "AI in Capital Markets Summit, London"
     session: "AI ROI: A Repeatable Framework."
     role: "Panel"
 
   - date: "26 March 2026"
+    isoDate: "2026-03-26"
+    location: "London"
     event: "Data Management Summit, London"
-    role: "Speaker"
+    session: "Beyond Silos: building a unified data ecosystem for access, agility and ROI."
+    role: "Panel"
+
+# Speaker kit (#speaker-kit): ready-to-use material for event organisers.
+kit:
+  intro: "For organisers: bios in three lengths, a headshot and the topics I speak on. Copy freely."
+  bios:
+    - label: "Short"
+      text: >-
+        Prerit Ahuja is Director, Global AI and Data Strategy at DNB Carnegie, where he built the
+        investment banking division's AI and data capability from zero. HotTopics Global CDO 100 (2026).
+    - label: "Medium"
+      text: >-
+        Prerit Ahuja is Director, Global AI and Data Strategy at DNB Carnegie, where he built the
+        investment banking division's AI and data capability from zero and leads its global AI
+        taskforce. He takes AI from strategy to daily use in regulated financial services: the
+        operating model, the governance and the production systems senior leadership relies on.
+        He is the author of the Capital Markets LLM Reliability Score and The Checking Problem,
+        and was named to the HotTopics Global CDO 100 in 2026.
+    - label: "Long"
+      text: >-
+        Prerit Ahuja is Director, Global AI and Data Strategy at DNB Carnegie, based in London. Over
+        the past decade he has built the investment banking division's AI and data capability from
+        zero into a governed platform of production AI used daily across the Nordics, the UK, the US
+        and Singapore, and he leads the division's global AI taskforce. His work sits where most AI
+        programmes stall: after the model works, in governance, reliability, adoption and proving
+        the return. He publishes on that problem. The Capital Markets LLM Reliability Score sets out
+        how far LLM output can be trusted in regulated workflows, and The Checking Problem measures
+        why AI that passes a demo so often fails in production. Before DNB Carnegie he built an AI
+        and data science practice for financial services clients at Capgemini Consulting. He studied
+        engineering at IIT Madras, was named to the HotTopics Global CDO 100 in 2026, and speaks at
+        AI and financial services conferences across Europe.
+  topics:
+    - "Proving AI ROI to a CFO"
+    - "From pilot to production in a regulated firm"
+    - "AI governance that speeds adoption instead of blocking it"
+    - "Agentic AI in financial workflows"
+    - "LLM reliability: from plausible to bankable"
+    - "Proprietary data as the only durable AI advantage"
+    - "The Chief AI Officer mandate"
+  headshot: "/images/headshot.jpeg"

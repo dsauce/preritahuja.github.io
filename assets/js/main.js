@@ -210,3 +210,15 @@
   }
 
 })();
+
+// Speaker kit: copy a bio to the clipboard.
+document.querySelectorAll("[data-copy]").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var text = btn.closest(".kit-bio").querySelector(".kit-bio-text").textContent.trim();
+    if (!navigator.clipboard) return;
+    navigator.clipboard.writeText(text).then(function () {
+      btn.textContent = "Copied";
+      setTimeout(function () { btn.textContent = "Copy"; }, 1600);
+    });
+  });
+});

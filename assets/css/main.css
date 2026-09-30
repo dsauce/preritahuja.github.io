@@ -863,3 +863,39 @@ main > section > .wrap > h2 {
   .site-header, .actions, .skip-link { display: none; }
   main > section { border-top: 0; background: none; padding-block: 1rem; }
 }
+
+/* --- Speaker kit ---------------------------------------------------------- */
+.talk-link { margin: 0.35rem 0 0; font-size: 0.9rem; }
+
+.kit-bios { display: grid; gap: 0.9rem; margin-bottom: 1.5rem; }
+.kit-bio {
+  background: var(--bg-raise);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+  box-shadow: var(--shadow);
+}
+.kit-bio-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.kit-bio-label {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.kit-bio-text { margin: 0.5rem 0 0; font-size: 0.95rem; line-height: 1.6; }
+.kit-copy {
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  padding: 0.2rem 0.65rem;
+  cursor: pointer;
+}
+.kit-copy:hover { color: var(--accent-hover); border-color: var(--accent); }
+.kit-topics { margin: 0 0 1.5rem; padding-left: 1.1rem; line-height: 1.8; }
+
+.site-nav a { white-space: nowrap; }

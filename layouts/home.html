@@ -63,7 +63,7 @@
   "mainEntityOfPage" $home
   "image" $ogImage
   "jobTitle" site.Params.employer.jobTitle
-  "description" "Enterprise digital and AI leader in regulated financial services. Builds production AI from zero to governed production and turns it into operating leverage and decision systems."
+  "description" "Enterprise AI and data leader in regulated financial services. Takes AI from strategy to governed daily use, and turns it into operating leverage."
   "worksFor" (dict "@type" "Organization" "name" site.Params.employer.name "url" site.Params.employer.url)
   "alumniOf" (dict "@type" "CollegeOrUniversity" "name" "Indian Institute of Technology Madras")
   "address" (dict "@type" "PostalAddress" "addressLocality" site.Params.location "addressCountry" "GB")
@@ -82,6 +82,11 @@
   {{- $awards = $awards | append $a -}}
 {{- end -}}
 {{- with $awards }}{{ $person = merge $person (dict "award" .) }}{{ end }}
+{{- with site.Params.subjectOf -}}
+  {{- $pages := slice -}}
+  {{- range . }}{{ $pages = $pages | append (dict "@type" "WebPage" "url" .) }}{{ end -}}
+  {{- $person = merge $person (dict "subjectOf" $pages) -}}
+{{- end -}}
 
 {{- $nodes := slice $person (dict
   "@type" "WebSite"
@@ -108,6 +113,23 @@
       "url" (index . 0)
       "sameAs" .
     ) -}}
+  {{- end -}}
+{{- end -}}
+{{/* Past talks with a fixed date become Event nodes with this person as performer. */}}
+{{- range $t := $speaking.past -}}
+  {{- with $t.isoDate -}}
+    {{- $ev := dict
+      "@type" "Event"
+      "name" $t.event
+      "startDate" .
+      "eventStatus" "https://schema.org/EventScheduled"
+      "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
+      "performer" (dict "@id" $personID)
+    -}}
+    {{- with $t.location }}{{ $ev = merge $ev (dict "location" (dict "@type" "Place" "name" . "address" .)) }}{{ end -}}
+    {{- with $t.session }}{{ $ev = merge $ev (dict "description" .) }}{{ end -}}
+    {{- with $t.url }}{{ $ev = merge $ev (dict "url" (absURL .)) }}{{ end -}}
+    {{- $nodes = $nodes | append $ev -}}
   {{- end -}}
 {{- end -}}
 <script type="application/ld+json">
@@ -234,6 +256,7 @@
           <p class="talk-event">{{ .event }}</p>
           {{- with .session }}<p class="talk-session">{{ . }}</p>{{ end }}
           {{- with .role }}<p class="talk-role">{{ . }}</p>{{ end }}
+          {{- with .url }}<p class="talk-link"><a class="link" href="{{ . }}">Read the talk</a></p>{{ end }}
         </li>
         {{- end }}
       </ul>
@@ -242,8 +265,43 @@
     </div>
   </section>
 
+  <!-- Speaker kit -->
+  {{- with $speaking.kit }}
+  <section id="speaker-kit" class="reveal">
+    <div class="wrap">
+      <h2>Speaker Kit</h2>
+      {{- with .intro }}<p class="section-lead">{{ . }}</p>{{ end }}
+
+      <h3 class="group-label">Bios</h3>
+      <div class="kit-bios">
+        {{- range .bios }}
+        <div class="kit-bio">
+          <div class="kit-bio-head">
+            <p class="kit-bio-label">{{ .label }}</p>
+            <button class="kit-copy" type="button" data-copy>Copy</button>
+          </div>
+          <p class="kit-bio-text">{{ .text }}</p>
+        </div>
+        {{- end }}
+      </div>
+
+      {{- with .topics }}
+      <h3 class="group-label">Topics</h3>
+      <ul class="kit-topics">
+        {{- range . }}<li>{{ . }}</li>{{ end }}
+      </ul>
+      {{- end }}
+
+      {{- with .headshot }}
+      <h3 class="group-label">Headshot</h3>
+      <p><a class="link" href="{{ . }}" download="prerit-ahuja-headshot.jpeg">Download headshot (JPEG)</a></p>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
   <!-- Recognition -->
-  <section id="recognition" class="reveal">
+  <section id="recognition" class="tinted reveal">
     <div class="wrap">
       <h2>Recognition</h2>
       {{/* Current recognition leads; anything flagged `muted` drops to Previous Awards. */}}
@@ -301,7 +359,7 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="tinted reveal">
+  <section id="contact" class="reveal">
     <div class="wrap">
       <h2>Contact</h2>
       {{/* LinkedIn is the only contact route. No email address on this site, in any form. */}}
