@@ -6,7 +6,7 @@ GitHub Pages via `.github/workflows/hugo.yml` on push to `main`. Custom domain:
 
 Everything lives on the home route. Sections in order: Hero (`#top`), About (`#about`),
 Selected Proof (`#proof`), Research & Writing (`#research`), Speaking (`#speaking`),
-Speaker Kit (`#speaker-kit`), Recognition (`#recognition`), Contact (`#contact`), footer.
+Recognition (`#recognition`), Contact (`#contact`), footer.
 
 ## Content rule: headlines, not detail
 
@@ -28,7 +28,6 @@ These drive the page directly. Edit the YAML, rebuild, done. No layout changes n
 - `data/speaking.yaml` — `intro`, `upcoming`, `past`. Grouping is **manual, not date-driven**:
   when an event passes, move the entry from `upcoming` to `past`. Optional per talk: `url`
   (renders "Read the talk"), `isoDate` + `location` (emit an `Event` node in the JSON-LD).
-  The `kit` block drives the Speaker Kit section (bios, topics, headshot).
 - `data/recognition.yaml` — awards (`award`, `body`, optional `url` and `detail`).
   `muted: true` moves an entry out of the lead card and under the **Previous Awards**
   sub-header, rendered smaller. Entries without it are lead cards.

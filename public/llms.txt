@@ -24,6 +24,3 @@ Focus: enterprise AI strategy, AI governance and reliability, and taking AI from
 - [AI governance in banking](https://preritahuja.com/ai-governance-in-banking/)
 - [Agentic AI in capital markets](https://preritahuja.com/agentic-ai-in-capital-markets/)
 - [LLM reliability in financial services](https://preritahuja.com/llm-reliability/)
-
-## Speaker kit
-- [Bios, topics and headshot](https://preritahuja.com/#speaker-kit)

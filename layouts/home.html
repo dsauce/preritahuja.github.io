@@ -265,43 +265,8 @@
     </div>
   </section>
 
-  <!-- Speaker kit -->
-  {{- with $speaking.kit }}
-  <section id="speaker-kit" class="reveal">
-    <div class="wrap">
-      <h2>Speaker Kit</h2>
-      {{- with .intro }}<p class="section-lead">{{ . }}</p>{{ end }}
-
-      <h3 class="group-label">Bios</h3>
-      <div class="kit-bios">
-        {{- range .bios }}
-        <div class="kit-bio">
-          <div class="kit-bio-head">
-            <p class="kit-bio-label">{{ .label }}</p>
-            <button class="kit-copy" type="button" data-copy>Copy</button>
-          </div>
-          <p class="kit-bio-text">{{ .text }}</p>
-        </div>
-        {{- end }}
-      </div>
-
-      {{- with .topics }}
-      <h3 class="group-label">Topics</h3>
-      <ul class="kit-topics">
-        {{- range . }}<li>{{ . }}</li>{{ end }}
-      </ul>
-      {{- end }}
-
-      {{- with .headshot }}
-      <h3 class="group-label">Headshot</h3>
-      <p><a class="link" href="{{ . }}" download="prerit-ahuja-headshot.jpeg">Download headshot (JPEG)</a></p>
-      {{- end }}
-    </div>
-  </section>
-  {{- end }}
-
   <!-- Recognition -->
-  <section id="recognition" class="tinted reveal">
+  <section id="recognition" class="reveal">
     <div class="wrap">
       <h2>Recognition</h2>
       {{/* Current recognition leads; anything flagged `muted` drops to Previous Awards. */}}
@@ -359,7 +324,7 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="reveal">
+  <section id="contact" class="tinted reveal">
     <div class="wrap">
       <h2>Contact</h2>
       {{/* LinkedIn is the only contact route. No email address on this site, in any form. */}}
